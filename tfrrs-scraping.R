@@ -4,7 +4,7 @@ library(stringr)
 oneAthlete <- read_html("https://www.tfrrs.org/athletes/6972495/Michigan/Ayden_Owens")
 oneAthlete
 
-tables <- one_athlete %>% 
+tables <- oneAthlete %>% 
     html_nodes("table")
 # for some reason html_nodes doesn't recognize tbody tags
 
@@ -31,7 +31,7 @@ re1500 <- "(?<=\\s{0,1000}+)(\\d:){1}(\\d{2}\\.\\d{1,2})"
 eventScoresRe <- c(re100, reLJ, reSP, reHJ, re400, re110H, reDT, rePV, reJT, re1500)
 eventNames <- c("100", "LJ", "SP", "HJ", "400", "110H", "DT", "PV", "JT", "1500")
 
-dec_scores = vector(mode = "list", length = length(dec_res))
+dec_scores = vector(mode = "list", length = length(decRes))
 for(i in 1:length(eventNameRe)) {
     allTextAfter <- str_extract(decRes, eventNameRe[i])
     dec_scores[[i]] <-
