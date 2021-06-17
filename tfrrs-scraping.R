@@ -1,50 +1,68 @@
 library(rvest)
 library(stringr)
 
-# regex for each event, assuming there is some form of whitespace preceeding it
-## ?<= is a positive look behind. It then looks for 
-## \\s is white space. {0, 1000} between this many spaces
-## d(1,2) one or two digits followed by a decimal followed by another two decimals
-
-re100 <- "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2})"
-reLJ <- "(?<=\\s{0,1000}+)(\\d{1}\\.\\d{1,2})"
-reSP <- "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2}m)"
-reHJ <- "(?<=\\s{0,1000}+)(\\d{1}\\.\\d{1,2}m)"
-re400 <- "(?<=\\s{0,1000}+)(\\d:){0,1}(\\d{2}\\.\\d{1,2})"
-re110H <- "(?<=\\s{0,1000}+)(\\d{2}\\.\\d{1,2})"
-reDT <- "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2}m)"
-rePV <- "(?<=\\s{0,1000}+)(\\d{1}\\.\\d{1,2}m)"
-reJT <- "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2}m)"
-re1500 <- "(?<=\\s{0,1000}+)(\\d:){1}(\\d{2}\\.\\d{1,2})"
-
-eventScoresRe <- c(re100, reLJ, reSP, reHJ, re400, re110H, reDT, rePV, reJT, re1500)
-eventNames <- c("100", "LJ", "SP", "HJ", "400", "110H", "DT", "PV", "JT", "1500")
-
-
+source("regex_list.R")
 
 #oneAthlete <- read_html("https://www.tfrrs.org/athletes/6972495/Michigan/Ayden_Owens")
-oneAthlete <- read_html("https://www.tfrrs.org/athletes/6997786/Georgia/Karel_Tilga")
-oneAthlete
+oneMAthlete <- read_html("https://www.tfrrs.org/athletes/6997786/Georgia/Karel_Tilga")
+oneMAthlete
 
-tables <- oneAthlete %>% 
+tables <- oneMAthlete %>% 
     html_nodes("table")
 # for some reason html_nodes doesn't recognize tbody tags
 
-dec <- grep("Dec\\n", tables, perl = TRUE)
-
-decRes <- tables[dec] %>% html_text() # contains all scores related to the decathlon
-
-# str_extract(decRes, "(?s)(?<=100).*") # hard coding that returns everything after the 100
-decEventNames <- c("100", "LJ", "SP", "HJ", "400", "110H", "DT", "PV", "JT", "1500")
-eventNameRe <- paste0("(?s)(?<=", decEventNames,").*")
-
-
-dec_scores = vector(mode = "list", length = length(decRes))
-for(i in 1:length(eventNameRe)) {
-    allTextAfter <- str_extract(decRes, eventNameRe[i])
-    dec_scores[[i]] <-
-        str_extract(allTextAfter, eventScoresRe[i])
-    names(dec_scores)[[i]] <- eventNames[i]
+getDecRes <- function(tables) {
+    dec <- grep("Dec\\n", tables, perl = TRUE)
+    decRes <- tables[dec] %>% html_text() # contains all scores related to the decathlon
+    decEventNames <- c("100", "LJ", "SP", "HJ", "400", "110H", "DT", "PV", "JT", "1500")
+    eventNameRe <- paste0("(?s)(?<=", decEventNames,").*")
+    dec_scores = vector(mode = "list", length = length(decRes))
+    for(i in 1:length(eventNameRe)) {
+        allTextAfter <- str_extract(decRes, eventNameRe[i])
+        dec_scores[[i]] <-
+            str_extract(allTextAfter, decScoresRe[i])
+        names(dec_scores)[[i]] <- eventNames[i]
+    }
+    return(dec_scores)
 }
-dec_scores
+
+getHepMRes <- function(tables) {
+    hep <- grep("Hep\\n", tables, perl = TRUE)
+    hepRes <- tables[hep] %>% html_text() # contains all scores related to the decathlon
+    hepEventMNames <- c("1000", "60", "LJ", "SP", "HJ", "60H", "PV")
+    eventNameRe <- paste0("(?s)(?<=", hepEventMNames,").*")
+    hep_scores = vector(mode = "list", length = length(hepRes))
+    for(i in 1:length(eventNameRe)) {
+        allTextAfter <- str_extract(hepRes, eventNameRe[i])
+        hep_scores[[i]] <-
+            str_extract(allTextAfter, hepScoresMRe[i])
+        names(hep_scores)[[i]] <- hepEventMNames[i]
+    }
+    return(hep_scores)
+}
+
+
+getDecRes(tables)
+getHepMRes(tables)
+
+oneWAthlete <- read_html("https://www.tfrrs.org/athletes/6559750/Texas_AM/Tyra_Gittens.html")
+oneWAthlete
+
+tables <- oneWAthlete %>% 
+    html_nodes("table")
+
+getPentRes <- function(tables) {
+    pent <- grep("Pent\\n", tables, perl = TRUE)
+    pentRes <- tables[pent] %>% html_text() # contains all scores related to the decathlon
+    pentEventNames <- c("1000", "60", "LJ", "SP", "HJ", "60H", "PV")
+    eventNameRe <- paste0("(?s)(?<=", pentEventNames,").*")
+    pent_scores = vector(mode = "list", length = length(pentRes))
+    for(i in 1:length(eventNameRe)) {
+        allTextAfter <- str_extract(pentRes, eventNameRe[i])
+        pent_scores[[i]] <-
+            str_extract(allTextAfter, pentScoresRe[i])
+        names(pent_scores)[[i]] <- pentEventNames[i]
+    }
+    return(hep_scores)
+}
 
