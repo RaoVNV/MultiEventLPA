@@ -1,0 +1,165 @@
+---
+title: "Annotated Bibliography"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This document contains short summaries of relevant papers. The intention is this document will inform our background section. 
+
+# Miscellaneous thoughts
+
+Most of these papers only seem to be describing either Dec results or Hep results, not both. 
+
+Be sure to include pent in this search!
+
+For the dec search: 
+
+- "grouping of decathlon disciplines" is a good search term
+
+We're going to have a massive sample size. Consider commenting on the cluster analysis and 3- or 5- cluster solution for the decs. (woolf et al., 2007; cox & dunn, 2002)
+
+
+
+# Cox and Dunn (2002)
+
+Title: [An analysis of decathlon data](https://rss.onlinelibrary.wiley.com/doi/pdf/10.1111/1467-9884.00310?casa_token=qo3zCjfIAuQAAAAA:j1kg5-BC_9cRxowJRmlGJ4M7jdcnpkcSHn10b0MvyaZdrmHPuGVCqMxxL6Xufii_opbYOhrS9Z2yKQ)
+<br>
+Citation: Cox, T. F., and Dunn, R. T. (2002). An analysis of decathlon data. Journal of the Royal Statistical Society: Series D (The Statistician), 51(2), 179-187.
+<br>
+<br>
+Data: IAAF World Championships between 1991-1999 (5 meets)
+<br>
+RQ: Internal Structure, and, Is event order fair?
+<br>
+<br>
+Methods: Hierarchical Cluster Analysis, correlational analysis
+<br>
+Findings: 
+
+- Clusters: Three cluster solution: {100m, 400m, LJ, 100mh}, {SP, DT, JT, PV}, {HJ, 1500m}. Two cluster solution separates 'track' events from 'field' events ({100, 400, 110, LJ}, {SP, DT, JT, PV, HJ, 1500}) and accounts for 50% of the variance
+
+- Variances: "The order of the 10 sample standard deviations is: 400m, 100m, 110mh, Dis, SP, LJ, HJ, Jav, PV, 1500m. Note that the three smallest standard deviations are for track events. The field events have larger standard deviations. This suggests that the decathlon could favour those athletes who are good in the field events." (p. 183)
+
+- Fairness: "for four [out of 5] of the meetings, the events ‘agree’ with each other on the ranking of the athletes." (p. 184) "tentative conclusion from the above analyses is that the decathlon favours those athletes who can do well at the field events." (p. 187)
+
+
+# Dawkins et al. (1999)
+
+Title: 
+<br>
+Citation: Dawkins, B. P., Andrea, P. M. and O’Connor, P. M. (1994) Analysis of Olympic heptathlon data. J. Am. Statist. Ass., 89, 1100–1106
+<br>
+<br>
+Data: 
+<br>
+RQ: 
+<br>
+<br>
+Methods: 
+<br>
+Findings: 
+
+-
+-
+
+# Heazlewood et al. (2014)
+
+Title: [The factor structure of the decathlon and heptathlon: Implications for training strength, power, speed, and endurance](https://researchers.cdu.edu.au/en/publications/the-factor-structure-of-the-decathlon-and-heptathlon-implications)
+<br>
+Citation: Heazlewood, T., Gahreman, D., & Lee, J. (2014). The Factor Structure of The Decathlon and Heptathlon: Implications for Training Strength, Power, Speed and Endurance. Journal of Australian Strength and Conditioning, 22(5), 161-166. https://www.strengthandconditioning.org/jasc-22-5
+<br>
+<br>
+Data: IAAF World Championships between 1991-1999 (5 meets)
+<br>
+RQ: Internal Structure, and, Is event order fair?
+<br>
+<br>
+Methods: Hierarchical Cluster Analysis, correlational analysis
+<br>
+Findings:
+
+# Majchrzak et al. (2010)
+
+Title: Developmental Tendencies of Results in Female Heptathlon in the Olympic Games during the Years 1984-2008
+<br>
+Citation: Majchrzak, K., Kamrowska-Nowak, M., & Byzdra, K. (2010). Developmental tendencies of results in female heptathlon in the Olympic Games during the years 1984-2008. Baltic Journal of Health and Physical Activity, 2(2), 158-163.
+<br>
+<br>
+Data: Olympic games between 1984 - 2008 (7 meets), Top 20 female athletes. 
+<br>
+RQ: 
+<br>
+<br>
+Methods: Correlational analysis
+<br>
+Findings: 
+
+- Correlation between event score and total score show many changes over the two decades (see Table 5)
+- In the last twenty years, top heptathletes have improved the most in the throwing events, on aggregate.
+- "A correlation analysis showed that 100mh, 200m, and LJ had the biggest influence on the final result in heptathlon" (p. 162)
+
+# Woolf et al. (2007)
+
+Title: Grouping of decathlon disciplines
+<br>
+Citation: Woolf, A., Ansley, L., & Bidgood, P. (2007). Grouping of decathlon disciplines. Journal of Quantitative Analysis in sports, 3(4).
+<br>
+<br>
+Data: personal best decathlon results over 8000pts in international competitions between 1986 and 2005
+<br>
+RQ: 
+<br>
+<br>
+Methods: Cluster analysis
+<br>
+Findings: 
+
+- Three cluster solution: {100m, 400m, 110mh, LJ, PV, HJ}, {SP, DT, JT}, {1500m}
+- Four cluster solution: {100m, 400m, 110mh, LJ, PV}, {SP, DT, JT}, {HJ}, {1500m}
+- Five cluster solution: {100m, 400m, 110mh, LJ}, {SP, DT, JT}, {PV}, {HJ}, {1500m}
+- The five cluster solution is better than the three cluster solution, even in a re-analysis of Cox and Dunn (2002)'s data.
+- "All six solutions assigned the first three track 'running' disciplines to a different group from the three 'throwing' disciplines (p. 5)
+- Small sample size may not have power to demonstrate the superiority of the 5-cluster solution. This study has larger sample size than Cox and Dunn (2002), and while results are similar, it appears that 5-cluster solution is better. 
+- "the composition of the clusters suggests that athletes who perform better in the sprint/track disciplines may be afforded an advantage as there are four disciplines in which they are likely to do well; whereas only three of the field disciplines are contained in the next largest cluster. This assumption is further strengthened by the observation that the average ranking of the top ten decathletes in the disciplines that comprise the first cluster is 11th, while their average ranking in the disciplines that comprise the second cluster is 27th."  *Well, perhaps the 'sprinter' profile is an easier path, but are they really better within the profile?*
+
+
+# Bilic (2015)
+
+Title: Determination of taxonomic type structures of top decathlon athletes
+<br>
+Citation: Bilić, M. (2015). Determination of taxonomic type structures of top decathlon athlets. Acta Kinesiologica, 9(1), 20-23.
+<br>
+<br>
+Data: Top 100 performances all time? Compared to a Senior list of 350 performances? (*this paper is hard to read, its translation into english is poor*)
+<br>
+RQ: Are there profiles? 
+<br>
+<br>
+Methods: Canonical discriminative analysis, hierarchical cluster analysis
+<br>
+Findings: 
+
+- Three profiles. Top one is a dominating sprint-jump qualities. Throwers and endurance profile is the worst. 
+- This paper has some stuff about aerobic-anaerobic systems that I can't quite make out both due to content knowledge and the poor quality of translation ...
+
+# Template
+
+Title: 
+<br>
+Citation:
+<br>
+<br>
+Data: 
+<br>
+RQ: 
+<br>
+<br>
+Methods: 
+<br>
+Findings: 
+
+-
+-
