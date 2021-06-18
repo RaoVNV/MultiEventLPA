@@ -1,10 +1,11 @@
 library(rvest)
 library(stringr)
+library(tidyverse)
 
 source("regex_list.R")
 
 #oneAthlete <- read_html("https://www.tfrrs.org/athletes/6972495/Michigan/Ayden_Owens")
-oneAthlete <- read_html("https://www.tfrrs.org/athletes/6997786/Georgia/Karel_Tilga")
+oneAthlete <- read_html("https://www.tfrrs.org/athletes/6559750/Texas_AM/Tyra_Gittens.html")
 oneAthlete
 
 tables <- oneAthlete %>% 
@@ -26,15 +27,40 @@ meetsNameDate
 
 textAfterMeet <- str_extract(meetRes, "(?s)(?<=\\n\\n\\t).*")
 
-textAfterMeet[17]
+textAfterMeet[11]
 
 eventNamesRe <- paste0("(?s)(?<=", allEventNames,").*")
 
-for(event in eventNamesRe) {
-    textAfterEvent <- str_extract(textAfterMeet[17], event)
-    print(textAfterEvent)
+# outer for loop
+for(meet in meetRes) {
+    # searching for which events the athlete competed in will be the inner forloop
 }
+res <- character()
+# inner for loop
+for(event in eventNamesRe) {
+    pent <- str_which(textAfterMeet[11], "Pent\\n")
+    if(length(pent) > 0) {
+        pentScores = character()
+        for(pentEvent in pentEventNames) {
+            pentEventRe <- pentNamesRe[str_which(pentNamesRe, pentEvent)]
+            textAfterEvent <- str_extract(textAfterMeet[11], pentEventRe)
+            pentScores[pentEvent] <- str_extract(textAfterEvent,
+                                                  pentScoresRe[names(pentEventRe)])
+        }
+        scoresCol <- bind_cols(result = pentScores)
+        pentResThisMeet <- tibble(meet = rep(meetNames[11], nrow(scoresCol)),
+                              date = rep(meetDates[11], nrow(scoresCol)),
+                              event = pentEventNames,
+                              scoresCol)
+        textAfterMeet[11]
+        textAfterMeet[11] <- str_extract(textAfterMeet[11], "(?s).*(?=Pent)")
+    }
+    # now we can grab the events that are not part of multi's
 
+    
+}
+event <- pentNamesRe[1]
+str_which(textAfterMeet[3], "Hep\\n")
 # strategy to prevent scraping events within multis as part of multis and on their own:
 # at the end of each meet, check and see if any scores for events are the same. e.g, if the same score for HJ shoes up, it's probably from the multis.
 # OR search FIRST for multi-event keywords. If they appear, try and temporarily delete that text. If the multi event scores consistenly appear after everything else, then you can temporarily delete that text and pull in other scores.
