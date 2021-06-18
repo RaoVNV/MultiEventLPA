@@ -11,8 +11,7 @@ getDecRes <- function(tables) {
     dec_scores = vector(mode = "list", length = length(eventNameRe))
     for(i in 1:length(eventNameRe)) {
         allTextAfter <- str_extract(decRes, eventNameRe[i])
-        dec_scores[[i]] <-
-            str_extract(allTextAfter, decScoresRe[i])
+        dec_scores[[i]] <- str_extract(allTextAfter, decScoresRe[i])
         names(dec_scores)[[i]] <- decEventNames[i]
     }
     return(dec_scores)

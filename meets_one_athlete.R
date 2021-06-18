@@ -25,41 +25,64 @@ meetDates <- str_extract(meetRes, reDates)
 meetsNameDate <- cbind(meetNames, meetDates)
 meetsNameDate
 
+
+eventNamesRe <- paste0("(?s)(?<=", allEventNames,"\\n).*")
+names(eventNamesRe) <- names(allScoresRe)
+
 textAfterMeet <- str_extract(meetRes, "(?s)(?<=\\n\\n\\t).*")
-
 textAfterMeet[11]
-
-eventNamesRe <- paste0("(?s)(?<=", allEventNames,").*")
-
 # outer for loop
-for(meet in meetRes) {
-    # searching for which events the athlete competed in will be the inner forloop
-}
-res <- character()
+# for(meet in meetRes) {
+#     # searching for which events the athlete competed in will be the inner forloop
+# }
+res <- tibble()
 # inner for loop
-for(event in eventNamesRe) {
+for (event in eventNamesRe) {
     pent <- str_which(textAfterMeet[11], "Pent\\n")
-    if(length(pent) > 0) {
+    if (length(pent) > 0) {
         pentScores = character()
-        for(pentEvent in pentEventNames) {
+        for (pentEvent in pentEventNames) {
             pentEventRe <- pentNamesRe[str_which(pentNamesRe, pentEvent)]
-            textAfterEvent <- str_extract(textAfterMeet[11], pentEventRe)
+            textAfterEvent <-
+                str_extract(textAfterMeet[11], pentEventRe)
             pentScores[pentEvent] <- str_extract(textAfterEvent,
-                                                  pentScoresRe[names(pentEventRe)])
+                                                 pentScoresRe[names(pentEventRe)])
         }
-        scoresCol <- bind_cols(result = pentScores)
-        pentResThisMeet <- tibble(meet = rep(meetNames[11], nrow(scoresCol)),
-                              date = rep(meetDates[11], nrow(scoresCol)),
-                              event = pentEventNames,
-                              scoresCol)
-        textAfterMeet[11]
-        textAfterMeet[11] <- str_extract(textAfterMeet[11], "(?s).*(?=Pent)")
+        pentResThisMeet <-
+            tibble(
+                meet = rep(meetNames[11], times = 5),
+                date = rep(meetDates[11], times = 5),
+                event = pentEventNames,
+                bind_cols(result = pentScores),
+                multi = rep("pent", times = 5)
+            )
+        res <- bind_rows(res, pentResThisMeet)
+        textAfterMeet[11] <-
+            str_extract(textAfterMeet[11], "(?s).*(?=Pent)")
     }
-    # now we can grab the events that are not part of multi's
-
     
+    textAfterEvent <- str_extract(textAfterMeet[11], event)
+    if (!is.na(textAfterEvent)) {
+        scoreRe <- names(eventNamesRe)[which(eventNamesRe == event)]
+        score <-
+            str_extract(textAfterEvent, allScoresRe[scoreRe])
+        eventName <-
+            names(eventNamesRe)[which(eventNamesRe == event)]
+        newRow <- c(
+            meet = meetNames[11],
+            date = meetDates[11],
+            event = str_replace(eventName, "re", ""),
+            result = score,
+            multi = "no"
+        )
+        res <- bind_rows(res, newRow)
+    }
 }
-event <- pentNamesRe[1]
+
+res
+
+event
+event <- eventNamesRe[14]
 str_which(textAfterMeet[3], "Hep\\n")
 # strategy to prevent scraping events within multis as part of multis and on their own:
 # at the end of each meet, check and see if any scores for events are the same. e.g, if the same score for HJ shoes up, it's probably from the multis.
