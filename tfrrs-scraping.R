@@ -4,7 +4,7 @@ library(stringr)
 source("regex_list.R")
 
 getDecRes <- function(tables) {
-    dec <- grep("Dec\\n", tables, perl = TRUE)
+    dec <- str_which(tables, "Dec\\n")
     decRes <- tables[dec] %>% html_text() # contains all scores related to the decathlon
     decEventNames <- c("100", "LJ", "SP", "HJ", "400", "110H", "DT", "PV", "JT", "1500")
     eventNameRe <- paste0("(?s)(?<=", decEventNames,").*")
@@ -19,7 +19,7 @@ getDecRes <- function(tables) {
 }
 
 getHepMRes <- function(tables) {
-    hep <- grep("Hep\\n", tables, perl = TRUE)
+    hep <- str_which(tables, "Hep\\n")
     hepRes <- tables[hep] %>% html_text() # contains all scores related to the decathlon
     hepEventMNames <- c("1000", "60", "LJ", "SP", "HJ", "60H", "PV")
     eventNameRe <- paste0("(?s)(?<=", hepEventMNames,").*")
@@ -33,7 +33,7 @@ getHepMRes <- function(tables) {
 }
 
 getHepWRes <- function(tables) {
-    hep <- grep("Hep\\n", tables, perl = TRUE)
+    hep <- str_which(tables, "Hep\\n")
     hepRes <- tables[hep] %>% html_text() # contains all scores related to the decathlon
     hepEventWNames <- c("100H", "HJ", "SP", "200", "LJ", "JT", "800")
     eventNameRe <- paste0("(?s)(?<=", hepEventWNames,").*")
@@ -48,7 +48,7 @@ getHepWRes <- function(tables) {
 }
 
 getPentRes <- function(tables) {
-    pent <- grep("Pent\\n", tables, perl = TRUE)
+    pent <- str_which(tables, "Pent\\n")
     pentRes <- tables[pent] %>% html_text() # contains all scores related to the decathlon
     pentEventNames <- c("60H", "HJ", "SP", "LJ", "800")
     eventNameRe <- paste0("(?s)(?<=", pentEventNames,").*")
