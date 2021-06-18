@@ -35,3 +35,6 @@ for(event in eventNamesRe) {
     print(textAfterEvent)
 }
 
+# strategy to prevent scraping events within multis as part of multis and on their own:
+# at the end of each meet, check and see if any scores for events are the same. e.g, if the same score for HJ shoes up, it's probably from the multis.
+# OR search FIRST for multi-event keywords. If they appear, try and temporarily delete that text. If the multi event scores consistenly appear after everything else, then you can temporarily delete that text and pull in other scores.
