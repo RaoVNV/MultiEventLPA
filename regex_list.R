@@ -20,7 +20,7 @@ re800 <- "(?<=\\s{0,1000}+)(\\d:){1}(\\d{2}\\.\\d{1,2})"
 re100H <- "(?<=\\s{0,1000}+)(\\d{2}\\.\\d{1,2})"
 
 
-decEventNames <- c("100", "LJ", "SP", "HJ", "400", "110H", "df", "PV", "JT", "1500")
+decEventNames <- c("100", "LJ", "SP", "HJ", "400", "110H", "DT", "PV", "JT", "1500")
 decScoresRe <- c(re100, reLJ, reSP, reHJ, re400, re110H, reDT, rePV, reJT, re1500)
 
 hepEventMNames <- c("1000", "60", "LJ", "SP", "HJ", "60H", "PV")
