@@ -5,7 +5,7 @@ library(tidyverse)
 source("regex_list.R")
 source("get_event_funcs.R")
 
-#oneAthlete <- read_html("https://www.tfrrs.org/athletes/6972495/Michigan/Ayden_Owens")
+# oneAthlete <- read_html("https://www.tfrrs.org/athletes/6997786/Georgia/Karel_Tilga")
 oneAthlete <- read_html("https://www.tfrrs.org/athletes/6559750/Texas_AM/Tyra_Gittens.html")
 oneAthlete
 
@@ -14,41 +14,59 @@ tables <- oneAthlete %>%
 
 meets <- grep("\\n\\n\\t", tables, perl = TRUE)
 
-meetRes <- tables[meets] %>% html_text
-meetNames <- str_extract(meetRes, "(?<=\\n\\n\\t).*")
+meetText <- tables[meets] %>% html_text
+meetNames <- str_extract(meetText, "(?<=\\n\\n\\t).*")
 
-reDates1 <- "[a-zA-Z]{3}\\s{1,2}\\d{1,2}-\\d{1,2},\\s\\d{4}"
-reDates2 <- "[a-zA-Z]{3}\\s{1,2}\\d{1,2},\\s\\d{4}"
-reDates3 <- "[a-zA-Z]{3}\\s{1,2}\\d{2}\\s-\\s[a-zA-Z]{3}\\s{2}\\d{1},\\s\\d{4}"
-reDates <- paste0(reDates1,"|",reDates2,"|",reDates3)
+reDates <- c("[a-zA-Z]{3}\\s{1,2}\\d{1,2}-\\d{1,2},\\s\\d{4}",
+             "[a-zA-Z]{3}\\s{1,2}\\d{1,2},\\s\\d{4}",
+             "[a-zA-Z]{3}\\s{1,2}\\d{2}\\s-\\s[a-zA-Z]{3}\\s{2}\\d{1},\\s\\d{4}")
+reDates <- paste0(reDates[1], "|", reDates[2], "|", reDates[3])
 
-meetDates <- str_extract(meetRes, reDates)
+meetDates <- str_extract(meetText, reDates)
 meetsNameDate <- cbind(meetNames, meetDates)
-meetsNameDate
 
 
 eventNamesRe <- paste0("(?s)(?<=", allEventNames,"\\n).*")
 names(eventNamesRe) <- names(allScoresRe)
 
-textAfterMeet <- str_extract(meetRes, "(?s)(?<=\\n\\n\\t).*")
+textAfterMeet <- str_extract(meetText, "(?s)(?<=\\n\\n\\t).*")
+
+# allMeetRes <- function(text) { # meetText will be the input
+#     # expand to also downloading the html information?
+#     browser()
+#     multiNames <- c("pent", "hep", "dec")
+#     res <- tibble()
+#     for(meet in meetText) {
+#         
+#     }
+# }
+
 # outer for loop
-# for(meet in meetRes) {
+# for(meet in meetText) {
 #     # searching for which events the athlete competed in will be the inner forloop
 # }
+
 res <- tibble()
 # inner for loop
 for (event in eventNamesRe) {
     # now we need to search for all variations of the multi events
-    pent <- str_which(textAfterMeet[11], "Pent\\n")
-    # look for the hep, and if found, look to see if there are complete entries for both the M and W's hep. If there are complete entries, you know if they're M or W, and use the corresponding getHepScoresM or getHepScoresW function.
-    if (length(pent) > 0) {
-        pentScores <- getPentScores(textAfterMeet[11])
-        res <- bind_rows(res, pentScores)
-        textAfterMeet[11] <- str_extract(textAfterMeet[11], "(?s).*(?=Pent)")
+    multi <- detectMulti(x)
+    if(!is.null(names(multi))) {
+        multiScores <- getMultiScores(meetText[1], multi)
+        res <- bind_rows(res, multiScores)
+        
+        textBeforeMultiRe <- paste0("(?s).*(?=", str_to_title(names(multi)), ")")
+        x <- str_extract(meetText[1], textBeforeMultiRe)
     }
-    textAfterEvent <- str_extract(textAfterMeet[11], event)
+    
+    # if (length(pent) > 0) {
+    #     pentScores <- getPentScores(textAfterMeet[1])
+    #     res <- bind_rows(res, pentScores)
+    #     textAfterMeet[1] <- str_extract(textAfterMeet[1], "(?s).*(?=Pent)")
+    # }
+    textAfterEvent <- str_extract(x, event)
     if (!is.na(textAfterEvent)) {
-        newRow <- getEventScore(textAfterEvent[11])
+        newRow <- getEventScore(textAfterEvent)
         res <- bind_rows(res, newRow)
     }
 }
