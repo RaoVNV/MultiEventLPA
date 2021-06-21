@@ -15,8 +15,8 @@ decScoresRe <- c(
 )
 
 decEventNames <- c("100", "LJ", "SP", "HJ", "400", "110H", "DT", "PV", "JT", "1500")
-decNameRe <- paste0("(?s)(?<=", decEventNames,").*")
-names(decNameRe) <- names(decScoresRe)
+decNamesRe <- paste0("(?s)(?<=", decEventNames,"\\n).*")
+names(decNamesRe) <- names(decScoresRe)
 
 hepScoresMRe <- c(
     re1000 = "(?<=\\s{0,1000}+)(\\d:){1}(\\d{2}\\.\\d{1,2})",
@@ -29,8 +29,8 @@ hepScoresMRe <- c(
 )
 
 hepEventMNames <- c("1000", "60", "LJ", "SP", "HJ", "60H", "PV")
-hepNameMRe <- paste0("(?s)(?<=", hepEventMNames,").*")
-names(hepNameMRe) <- names(hepScoresMRe)
+hepNamesMRe <- paste0("(?s)(?<=", hepEventMNames,"\\n).*")
+names(hepNamesMRe) <- names(hepScoresMRe)
 
 hepScoresWRe <- c(
     re100H = "(?<=\\s{0,1000}+)(\\d{2}\\.\\d{1,2})",
@@ -43,8 +43,8 @@ hepScoresWRe <- c(
 )
 
 hepEventWNames <- c("100H", "HJ", "SP", "200", "LJ", "JT", "800")
-hepNameWRe <- paste0("(?s)(?<=", hepEventWNames,").*")
-names(hepNameWRe) <- names(hepScoresWRe)
+hepNamesWRe <- paste0("(?s)(?<=", hepEventWNames,"\\n).*")
+names(hepNamesWRe) <- names(hepScoresWRe)
 
 pentScoresRe <- c(
     re60H = "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2})",
@@ -55,7 +55,7 @@ pentScoresRe <- c(
 )
 
 pentEventNames <- c("60H", "HJ", "SP", "LJ", "800")
-pentNamesRe <- paste0("(?s)(?<=", pentEventNames,").*")
+pentNamesRe <- paste0("(?s)(?<=", pentEventNames,"\\n).*")
 names(pentNamesRe) <- names(pentScoresRe)
 
 
