@@ -5,9 +5,9 @@ library(tidyverse)
 source("regex_list.R")
 source("get_event_funcs.R")
 
-oneAthlete <- read_html("https://www.tfrrs.org/athletes/6997786/Georgia/Karel_Tilga")
+# oneAthlete <- read_html("https://www.tfrrs.org/athletes/6997786/Georgia/Karel_Tilga")
 # oneAthlete <- read_html("https://www.tfrrs.org/athletes/6559750/Texas_AM/Tyra_Gittens.html")
-oneAthlete
+oneAthlete <- read_html("https://www.tfrrs.org/athletes/6422180/Notre_Dame/Yared_Nuguse")
 
 tables <- oneAthlete %>% 
     html_nodes("table")

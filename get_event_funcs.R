@@ -14,6 +14,31 @@ getEventScore <- function(x, eventNamesRe, event, meetName, meetDate) {
     return(newRow)
 }
 
+vectorIsNotEmpty <- function(x) {return(!(length(x) == 0))}
+
+detectMulti <- function(x) {
+    # browser()
+    pent <- str_which(x, "Pent\\n")
+    hep <- str_which(x, "Hep\\n")
+    dec <- str_which(x, "Dec\\n")
+    
+    if(any(length(c(pent, hep, dec) > 0))) {
+        idx <- which(map(list(pent, hep, dec), vectorIsNotEmpty) == TRUE)
+        res <- c(pent, hep, dec)[idx]
+        multiEventNames <- c("pent", "hep", "dec")
+        names(res) <- multiEventNames[idx]
+        return(res)
+    }
+}
+
+getMultiScores <- function(x, event) {
+    # browser()
+    multiScores <- character()
+    multi <- match.arg(names(event), choices = c("pent", "hep", "dec"))
+    switch(multi, pent = getPentScores(x),
+           hep = getHepScores(x),
+           dec = getDecScores(x))
+}
 
 getPentScores <- function(x) { # requires full text from each meet, not textAfterMeet
     # browser()
@@ -104,29 +129,3 @@ getDecScores <- function(x) { # requires full text from each meet, not textAfter
     return(decResThisMeet)
 }
 
-
-vectorIsNotEmpty <- function(x) {return(!(length(x) == 0))}
-
-detectMulti <- function(x) {
-    # browser()
-    pent <- str_which(x, "Pent\\n")
-    hep <- str_which(x, "Hep\\n")
-    dec <- str_which(x, "Dec\\n")
-    
-    if(any(length(c(pent, hep, dec) > 0))) {
-        idx <- which(map(list(pent, hep, dec), vectorIsNotEmpty) == TRUE)
-        res <- c(pent, hep, dec)[idx]
-        multiEventNames <- c("pent", "hep", "dec")
-        names(res) <- multiEventNames[idx]
-        return(res)
-    }
-}
-
-getMultiScores <- function(x, event) {
-    # browser()
-    multiScores <- character()
-    multi <- match.arg(names(event), choices = c("pent", "hep", "dec"))
-    switch(multi, pent = getPentScores(x),
-           hep = getHepScores(x),
-           dec = getDecScores(x))
-}

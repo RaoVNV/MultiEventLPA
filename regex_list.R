@@ -80,7 +80,7 @@ indoorScoresRe <- c(
     re5000 = "(?<=\\s{0,1000}+)(\\d{2}:)(\\d{2}\\.\\d{1,2})",
     re60H = "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2})",
     re4x400 = "(?<=\\s{0,1000}+)(\\d:){1}(\\d{2}\\.\\d{1,2})",
-    reDMR = "(?<=\\s{0,1000}+)(\\d{2}:)(\\d{2}\\.\\d{1,2})",
+    reDMR = "(?<=\\s{0,1000}+)(\\d{1,2}:)(\\d{2}\\.\\d{1,2})",
     reHJ = "(?<=\\s{0,1000}+)(\\d{1}\\.\\d{1,2})",
     rePV = "(?<=\\s{0,1000}+)(\\d{1}\\.\\d{1,2})",
     reLJ = "(?<=\\s{0,1000}+)(\\d{1}\\.\\d{1,2})",
@@ -119,4 +119,3 @@ outdoorScoresRe <- c(
 indoorOnlyScoresRe <- !(names(indoorScoresRe) %in% names(outdoorScoresRe))
 indoorScoresRe[indoorOnlyScoresRe]
 allScoresRe <- c(outdoorScoresRe, indoorScoresRe[indoorOnlyScoresRe])
-allScoresRe

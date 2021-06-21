@@ -1,3 +1,5 @@
+# tbh this is becoming more of a testing area than anything else. Use meets_one_athete.R instead
+
 library(rvest)
 library(stringr)
 
