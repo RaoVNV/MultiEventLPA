@@ -1,14 +1,12 @@
 # Functions to get multi-event results
 
-getEventScore <- function(x) {
+getEventScore <- function(x, eventNamesRe, event, meetName, meetDate) {
     scoreRe <- names(eventNamesRe)[which(eventNamesRe == event)]
-    score <-
-        str_extract(textAfterEvent, allScoresRe[scoreRe])
-    eventName <-
-        names(eventNamesRe)[which(eventNamesRe == event)]
+    score <- str_extract(x, allScoresRe[scoreRe])
+    eventName <- names(eventNamesRe)[which(eventNamesRe == event)]
     newRow <- c(
-        meet = meetNames[11],
-        date = meetDates[11],
+        meet = meetName,
+        date = meetDate,
         event = str_replace(eventName, "re", ""),
         result = score,
         multi = "no"
@@ -91,14 +89,14 @@ getDecScores <- function(x) { # requires full text from each meet, not textAfter
                                              decScoresRe[names(decEventRe)])
     }
     
-    meetNames <- str_extract(x, "(?<=\\n\\n\\t).*")
-    meetDates <- str_extract(x, reDates)
+    meetName <- str_extract(x, "(?<=\\n\\n\\t).*")
+    meetDate <- str_extract(x, reDates)
     eventNames <- decEventNames
     
     decResThisMeet <-
         tibble(
-            meet = rep(meetNames, times = length(eventNames)),
-            date = rep(meetDates, times = length(eventNames)),
+            meet = rep(meetName, times = length(eventNames)),
+            date = rep(meetDate, times = length(eventNames)),
             event = eventNames,
             bind_cols(result = decScores),
             multi = rep("dec", times = length(eventNames))
