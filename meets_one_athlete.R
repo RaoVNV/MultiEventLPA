@@ -1,31 +1,76 @@
 library(rvest)
 library(stringr)
+library(tidyverse)
 
-source("re_dec.R")
+source("regex_list.R")
+source("get_event_funcs.R")
 
-#oneAthlete <- read_html("https://www.tfrrs.org/athletes/6972495/Michigan/Ayden_Owens")
-oneAthlete <- read_html("https://www.tfrrs.org/athletes/6997786/Georgia/Karel_Tilga")
-oneAthlete
+# oneAthlete <- read_html("https://www.tfrrs.org/athletes/6997786/Georgia/Karel_Tilga")
+oneAthlete <- read_html("https://www.tfrrs.org/athletes/6559750/Texas_AM/Tyra_Gittens.html")
+# check to make sure that other weird events are also downloaded properly
+# oneAthlete <- read_html("https://www.tfrrs.org/athletes/6422180/Notre_Dame/Yared_Nuguse")
+
+# at some point all off this should be combined into one function whose argument is just a url
+athleteName <- oneAthlete %>% 
+    html_nodes("title") %>% 
+    html_text() %>% 
+    str_extract("(?<=\\| ).*") %>% 
+    str_extract(".*(?= - )")
+athleteName
+
+# Getting lists of athletes:
+# https://www.tfrrs.org/results_search.html meet results
+# somehow filter by T&F if possible
+# somehow filter by state/province and year
+# get a link for a meet
+# use a regex to see if where any multi's in that meet
+# if there were multi's, go to the link for the multi's
+# get athlete names and also get their sex (e.g. search "Women's")
+# see if results have already been compiled for that athlete
+# if a new athlete, get URL for that athlete
+# use the rest of this script to get their scores from their indiviual page
 
 tables <- oneAthlete %>% 
     html_nodes("table")
-
 meets <- grep("\\n\\n\\t", tables, perl = TRUE)
+meetText <- tables[meets] %>% html_text
 
-meetRes <- tables[meets] %>% html_text
-
-allTextAfter <- str_extract(meetRes, "(?s)(?<=\\n\\n\\t).*")
-meetNames <- str_extract(meetRes, ".+(?=\\n\\n\\s)")
-meetNames <- str_extract(meetRes, "(?<=\\t).*")
-
+reDates <- c("[a-zA-Z]{3}\\s{1,2}\\d{1,2}-\\d{1,2},\\s\\d{4}",
+             "[a-zA-Z]{3}\\s{1,2}\\d{1,2},\\s\\d{4}",
+             "[a-zA-Z]{3}\\s{1,2}\\d{2}\\s-\\s[a-zA-Z]{3}\\s{2}\\d{1},\\s\\d{4}")
+reDates <- paste0(reDates[1], "|", reDates[2], "|", reDates[3])
 
 
-reDates1 <- "[a-zA-Z]{3}\\s{1,2}\\d{1,2}-\\d{1,2},\\s\\d{4}"
-reDates2 <- "[a-zA-Z]{3}\\s{1,2}\\d{1,2},\\s\\d{4}"
-reDates3 <- "[a-zA-Z]{3}\\s{1,2}\\d{2}\\s-\\s[a-zA-Z]{3}\\s{2}\\d{1},\\s\\d{4}"
+eventNamesRe <- paste0("(?s)(?<=", allEventNames,"\\n).*")
+names(eventNamesRe) <- names(allScoresRe)
 
-reDates <- paste0(reDates1,"|",reDates2,"|",reDates3)
+allMeetRes <- function(x) {
+    # browser()
+    res <- tibble()
+    for(meet in meetText) { # outer for loop goes through each meet
+        multi <- detectMulti(meet)
+        meetName <- str_extract(meet, "(?<=\\n\\n\\t).*")
+        meetDate <- str_extract(meet, reDates)
+        for (event in eventNamesRe) { # inner for loop goes through each event
+            # now we need to search for all variations of the multi events
+            if (!is.null(names(multi))) {
+                multiScores <- getMultiScores(meet, multi)
+                res <- bind_rows(res, multiScores)
+                
+                textBeforeMultiRe <- paste0("(?s).*(?=", str_to_title(names(multi)), ")")
+                meet <- str_extract(meet, textBeforeMultiRe)
+                names(multi) <- NULL
+            }
+            
+            textAfterEvent <- str_extract(meet, event)
+            if (!is.na(textAfterEvent)) {
+                newRow <- getEventScore(textAfterEvent, eventNamesRe, event, meetName, meetDate)
+                res <- bind_rows(res, newRow)
+            }
+        }
+    }
+    return(res)
+}
 
-meetDates <- str_extract(meetRes, reDates)
-meetsNameDate <- cbind(meetNames, meetDates)
-meetsNameDate
+meetRes <- allMeetRes(meetText)
+meetRes %>% View
