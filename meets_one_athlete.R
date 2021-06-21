@@ -6,24 +6,39 @@ source("regex_list.R")
 source("get_event_funcs.R")
 
 # oneAthlete <- read_html("https://www.tfrrs.org/athletes/6997786/Georgia/Karel_Tilga")
-# oneAthlete <- read_html("https://www.tfrrs.org/athletes/6559750/Texas_AM/Tyra_Gittens.html")
-oneAthlete <- read_html("https://www.tfrrs.org/athletes/6422180/Notre_Dame/Yared_Nuguse")
+oneAthlete <- read_html("https://www.tfrrs.org/athletes/6559750/Texas_AM/Tyra_Gittens.html")
+# check to make sure that other weird events are also downloaded properly
+# oneAthlete <- read_html("https://www.tfrrs.org/athletes/6422180/Notre_Dame/Yared_Nuguse")
+
+# at some point all off this should be combined into one function whose argument is just a url
+athleteName <- oneAthlete %>% 
+    html_nodes("title") %>% 
+    html_text() %>% 
+    str_extract("(?<=\\| ).*") %>% 
+    str_extract(".*(?= - )")
+athleteName
+
+# Getting lists of athletes:
+# https://www.tfrrs.org/results_search.html meet results
+# somehow filter by T&F if possible
+# somehow filter by state/province and year
+# get a link for a meet
+# use a regex to see if where any multi's in that meet
+# if there were multi's, go to the link for the multi's
+# get athlete names and also get their sex (e.g. search "Women's")
+# see if results have already been compiled for that athlete
+# if a new athlete, get URL for that athlete
+# use the rest of this script to get their scores from their indiviual page
 
 tables <- oneAthlete %>% 
     html_nodes("table")
-
 meets <- grep("\\n\\n\\t", tables, perl = TRUE)
-
 meetText <- tables[meets] %>% html_text
-# meetNames <- str_extract(meetText, "(?<=\\n\\n\\t).*")
 
 reDates <- c("[a-zA-Z]{3}\\s{1,2}\\d{1,2}-\\d{1,2},\\s\\d{4}",
              "[a-zA-Z]{3}\\s{1,2}\\d{1,2},\\s\\d{4}",
              "[a-zA-Z]{3}\\s{1,2}\\d{2}\\s-\\s[a-zA-Z]{3}\\s{2}\\d{1},\\s\\d{4}")
 reDates <- paste0(reDates[1], "|", reDates[2], "|", reDates[3])
-
-# meetDates <- str_extract(meetText, reDates)
-# meetsNameDate <- cbind(meetNames, meetDates)
 
 
 eventNamesRe <- paste0("(?s)(?<=", allEventNames,"\\n).*")
