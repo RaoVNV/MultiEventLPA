@@ -1,6 +1,11 @@
 # Regular expressions for use in scripts
 # I deleted all the "m"'sfrom the jumps, throws, etc. We can add those back later if it's helpful
 
+reDates <- c("[a-zA-Z]{3}\\s{1,2}\\d{1,2}-\\d{1,2},\\s\\d{4}",
+             "[a-zA-Z]{3}\\s{1,2}\\d{1,2},\\s\\d{4}",
+             "[a-zA-Z]{3}\\s{1,2}\\d{2}\\s-\\s[a-zA-Z]{3}\\s{2}\\d{1},\\s\\d{4}")
+reDates <- paste0(reDates[1], "|", reDates[2], "|", reDates[3])
+
 decScoresRe <- c(
     re100 = "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2})",
     reLJ = "(?<=\\s{0,1000}+)(\\d{1}\\.\\d{1,2})",
