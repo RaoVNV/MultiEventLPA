@@ -70,7 +70,7 @@ getHepScores <- function(x) { # requires full text from each meet, not textAfter
     # browser()
     hepScores = character()
     eventNames <- hepEventMNames
-    
+    # there's a problem if the athlete ran a 55 or 55H instead of a 60 or 60H
     for (hepEventM in hepEventMNames) {
         hepEventMRe <- hepNamesMRe[str_which(names(hepNamesMRe), paste0(hepEventM,"$"))]
         textAfterEvent <- str_extract(x, hepEventMRe)
