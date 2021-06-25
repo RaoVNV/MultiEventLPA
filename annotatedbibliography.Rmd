@@ -48,7 +48,7 @@ Findings:
 
 # Dawkins et al. (1999)
 
-Title: 
+Title: **Find and Read this Paper**
 <br>
 Citation: Dawkins, B. P., Andrea, P. M. and O’Connor, P. M. (1994) Analysis of Olympic heptathlon data. J. Am. Statist. Ass., 89, 1100–1106
 <br>
@@ -145,12 +145,205 @@ Findings:
 - Three profiles. Top one is a dominating sprint-jump qualities. Throwers and endurance profile is the worst. 
 - This paper has some stuff about aerobic-anaerobic systems that I can't quite make out both due to content knowledge and the poor quality of translation ...
 
+# Brodani et al. (2020)
+
+Title: Classification of athletic decathlon using methods of hierarchical analysis
+<br>
+Citation: BROĎÁNI, J., DVOŘÁČKOVÁ, N., & CZAKOVÁ, M. (2020). Classification of athletic decathlon using methods of hierarchical analysis. Journal of Physical Education & Sport, 20 (S6), 3253-3259.
+<br>
+<br>
+Data: Scores about 8000 from IAAF competitions between 1986-2019 (n=255)
+<br>
+RQ: Identify groups of athletic disciplines affecting sport performance in decathlon
+<br>
+<br>
+Methods: hierarchical clustering
+<br>
+Findings: 
+
+- four groups of disciplines: {100m, 400m, LJ, 110mh, PV}, {HJ}, {1500}, {SP, DT, JT}
+- stability test - 85.71%
+- similar to Woolf et al. 2007 and Cox and Dunn 2002. 
+
+# Brodani et al. (2020)
+
+Title: **Find and read this paper**
+<br>
+Citation: Broďáni, J., Czaková, M., Kováčová, N. (2020). Share of athletic disciplines on average performance in decathlon of men with a value of 8282.74 points. Physical education, sport and olympics, Proceedings report of international scientific conference. Ružomberok : VERBUM vydavateľstvo KU, 2020. [In press]. 
+
+<br>
+<br>
+Data: 
+<br>
+RQ: versatility?
+<br>
+<br>
+Methods: 
+<br>
+Findings: 
+
+-
+-
+
+# Kostial (1993)
+
+Title: **Find and read this paper**
+<br>
+Citation: Koštiaľ, J. (1993). A Structure of Performance in decathlon. Physical Education and Sport, 3(4): 19-22. 
+<br>
+<br>
+Data: 
+<br>
+RQ: 
+<br>
+<br>
+Methods: 
+<br>
+Findings: 
+
+- two disciplines from the first day contributed to their final performance (in top decathletes)
+-
+
+# Brodani (2006)
+
+Title: **Find and read this paper**
+<br>
+Citation: Broďáni, J. (2006). Decathlon with an Average Performance of 7219.91 Points. Journal Of Coimbra Network On Excercise Sciences. 3(1): 63-66. 
+
+<br>
+<br>
+Data: 
+<br>
+RQ: 
+<br>
+<br>
+Methods: 
+<br>
+Findings: 
+
+- lower score decathlon refers to low versatility and preference of running and jumping over technical throwing disciplines. 
+-
+
+# Pavlovic and Idrizovic (2017)
+
+Title: **Find and read this paper**
+<br>
+Citation: Pavlović, R.,Idrizović, K.(2017). Factor analysis of world record holders in athletic decathlon. Sport Science, 10(1): 109-116.
+<br>
+<br>
+Data: 
+<br>
+RQ: 
+<br>
+<br>
+Methods: 
+<br>
+Findings: 
+
+- Typology of top decathletes as jumper-thrower-runner
+-
+
+# Pavlovic (2017)
+
+Title: **Find and read this paper**
+<br>
+Citation: Pavlović, R.(2017). Discipline homogeneity based on the most successful decathlon scoring placement. Turk J Kin. 3(1): 6-11. 
+<br>
+<br>
+Data: 
+<br>
+RQ: 
+<br>
+<br>
+Methods: 
+<br>
+Findings: 
+
+- runner jumper type
+-
+
+# Park and Zatsiorkij (2011)
+
+Title: **Find and read this paper**
+<br>
+Citation: Park, J., Zatsiorsky, V. M. (2011). Multivariate statistical analysis of decathlon performance results in olympic athletes (1988–2008). World Acad. Sci. Eng. Technol, 5: 985-988.
+<br>
+<br>
+Data: 
+<br>
+RQ: prediction factors utilizing factor analysis
+<br>
+<br>
+Methods: 
+<br>
+Findings: 
+
+- total score mainly influenced by 100m 400m 110mH and LJ
+-
+
+# Kenny et al. (2005)
+
+Title: Determinants of Success in the Olympic Decathlon: Some Statistical Evidence
+<br>
+Citation: Kenny, I. C., Sprevak, D., Sharp, C., & Boreham, C. (2005). Determinants of success in the olympic decathlon: Some statistical evidence. Journal of Quantitative Analysis in Sports, 1(1), 5.
+<br>
+<br>
+Data: 92 olympic decathletes from 1984 to 2000
+<br>
+RQ: in an elite subset, are correlations between events still observed?
+<br>
+<br>
+Methods: standardized scores by event. comparison of highest standardized score to average standardized score by athlete
+<br>
+Findings: 
+
+- Within Van Damme et al's (2002) analysis of 600 decathletes, there is a subset that behaves differently. That is, that a uniform relatively high performance in all individual events is required to effectively compete at the top level.
+- Efforts should be made to train for uniformity of performance
+
+# Van Damme et al (2002)
+
+Title: **Find and read this paper**
+<br>
+Citation: Van Damme, R., Wilson, R.S., Vanhooydonck, B. and Aerts, P., Performance
+constraints in decathletes, Nature, 2002, 415: 755-756.
+<br>
+<br>
+Data: 
+<br>
+RQ: 
+<br>
+<br>
+Methods: 
+<br>
+Findings: 
+
+- negative correlation between some pairs of events
+-
+
+# Ward et al. (2002)
+
+Title: **Find and read this paper**
+<br>
+Citation: Ward, P., Sprevak, D. and Boreham, C., It takes ten events to make the
+Olympic decathlon, International Journal of Mathematical Education in Science &
+Technology, 2002, 33:(6) 926-933. 
+<br>
+<br>
+Data: 
+<br>
+RQ: correlation between events
+<br>
+<br>
+Methods: 
+<br>
+Findings: 
+
+- 
+-
 
 # Next up links
 
 ## internal structure
-https://efsupit.ro/images/stories/noiembrie2020/Art%20441.pdf
-https://ulir.ul.ie/bitstream/handle/10344/2216/Kenny%2CIan.pdf?sequence=2
 https://www.koreascience.or.kr/article/JAKO201013351015954.pdf
 https://en.cnki.com.cn/Article_en/CJFDTotal-GZTX200805017.htm
 https://en.cnki.com.cn/Article_en/CJFDTotal-BJTD200408047.htm
