@@ -15,11 +15,11 @@ Most of these papers only seem to be describing either Dec results or Hep result
 
 Be sure to include pent in this search!
 
-For the dec search: 
-
-- "grouping of decathlon disciplines" is a good search term
+For the dec search, "grouping of decathlon disciplines" is a good search term
 
 We're going to have a massive sample size. Consider commenting on the cluster analysis and 3- or 5- cluster solution for the decs. (woolf et al., 2007; cox & dunn, 2002)
+
+It may be that the dec scoring system naturally encourages the sprinters, who can swallow mediocre scores in SP DT and JT events. Because of the different number of events, the Hep might not disadvantage certain profiles as much ... we should consider this. The idea of our profiles are that these are perhaps distinct combinations of physiologies and talents in multi-events, but when combined with the constraints of the scoring system, optimization looks different for each event. We should consider combining hep and dec data ... what would that look like?
 
 
 
@@ -341,13 +341,78 @@ Findings:
 - 
 -
 
+# Lee (2010)
+
+Title: A study on the performance patterns of elite decathlon athletes
+<br>
+Citation: Lee, J. T. (2010). A Study on the performance pattern in the elite decathlon. Journal of the Korean Data and Information Science Society, 21(6), 1071-1079.
+<br>
+<br>
+Data: Top 200 IAAF scores between 1991 and 2009
+(*this paper is hard to read, its translation into english is poor. the original paper is in korean*)
+<br>
+RQ: 
+<br>
+<br>
+Methods: correspondence analysis and canonical correlation analysis
+<br>
+Findings: 
+
+- "athletes who are strong in track events using speed and who are good at throwing have achieved the highest level" (p. 7)
+-
+
+# Tidow (2000)
+
+Title: **Find and read this paper**
+<br>
+Citation: Tidow, G. (2000). Challenge decathlon-barriers on the way to becoming the “king of athletes”. New Studiesin Athletics, 15, 43-52
+<br>
+<br>
+Data: 
+<br>
+RQ: 
+<br>
+<br>
+Methods: 
+<br>
+Findings: 
+
+- efficient and comprehensive simultaneous training for all decathlon events is impossible
+-
+
+# Jing (2008)
+
+Title: An analysis of the competitive characteristics and strength of the outstanding male decathlon athletes in my country
+<br>
+Citation: Jing, X. U. 2008. Study on the Competitive Feature and
+Actual Strength of Chinese Outstanding Male Decathlon
+Athletesl. Journal of Guangzhou Sport University. 28, 5
+(December. 2008), 61-64. DOI=
+http://dx.doi.org/10.3969/j.issn.1007-323X.2008.05.017
+<br>
+<br>
+Data: Chinese decathletes
+(*I cant actually find a copy of this paper. Just the abstract*)
+<br>
+RQ: 
+<br>
+<br>
+Methods: Gray correlation analysis
+<br>
+Findings: 
+
+- Chinese decathletes are good at 110mh, PV, 100m, and 400m. I.e., generally have strong scoring ability in the speed events, but are not as good on the other events.
+- See similar studies by Huang and He (2013) and Zheng and Jia (2004) using Gray Correlative Analysis
+- Huang, C., & He, Y. (2013, August). Grey Correlation Analysis of Decathlon Achievement of the World Elite Athletes Ashton James Eaton. In 2013 International Workshop on Computer Science in Sports (pp. 265-268). Atlantis Press. Accessed via https://www.atlantis-press.com/article/9026.pdf
+- ZHENG Yi-le; JIA Chang-zhi. Gray Correlative Analysis of the
+Achievement of Top Chinese and Foreign Decathlon Athletes,
+Journal of Beijing University of Physical Education,2004,24(8):
+1135-1136.
+
+
 # Next up links
 
 ## internal structure
-https://www.koreascience.or.kr/article/JAKO201013351015954.pdf
-https://en.cnki.com.cn/Article_en/CJFDTotal-GZTX200805017.htm
-https://en.cnki.com.cn/Article_en/CJFDTotal-BJTD200408047.htm
-
 https://wnus.edu.pl/cejssm/file/article/view/14672.pdf
 https://www.researchgate.net/profile/Ratko-Pavlovic-2/publication/318226224_Factor_analysis_of_world_record_holders_in_athletic_decathlon/links/595df26fa6fdcc6d855d5396/Factor-analysis-of-world-record-holders-in-athletic-decathlon.pdf
 https://www.degruyter.com/document/doi/10.2202/1559-0410.1249/html
@@ -367,8 +432,7 @@ https://www.sciencedirect.com/science/article/abs/pii/S0765159712000615
 
 ## scoring systems
 
-https://www.google.com/books/edition/50_Visions_of_Mathematics/ddJjAwAAQBAJ?hl=en&gbpv=1&dq=decathlon&pg=PT30&printsec=frontcover
-
+- Barrow, J. (2014). Decathlon: The Art of Scoring Points. 50 Visions of Mathematics, 11-15.
 
 # Template
 
