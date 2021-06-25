@@ -21,7 +21,7 @@ We're going to have a massive sample size. Consider commenting on the cluster an
 
 It may be that the dec scoring system naturally encourages the sprinters, who can swallow mediocre scores in SP DT and JT events. Because of the different number of events, the Hep might not disadvantage certain profiles as much ... we should consider this. The idea of our profiles are that these are perhaps distinct combinations of physiologies and talents in multi-events, but when combined with the constraints of the scoring system, optimization looks different for each event. We should consider combining hep and dec data ... what would that look like?
 
-
+Most cluster analyses have used scores, but each score calculation is a nonlinear transformation of the event results, thus there is a difference in the change in standardized scores for the same change in standardized performance across events. This will impact the analyses. While perhaps not an issue when making interpretations about the relationship of performances with an eye to maximize total score, there is a clear implication when making interpretations on the physiological taxation of the events and implications for training regimens. 
 
 # Cox and Dunn (2002)
 
