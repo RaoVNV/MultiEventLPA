@@ -1,6 +1,8 @@
 # Regular expressions for use in scripts
 # I deleted all the "m"'sfrom the jumps, throws, etc. We can add those back later if it's helpful
 
+# put relays first
+
 reDates <- c("[a-zA-Z]{3}\\s{1,2}\\d{1,2}-\\d{1,2},\\s\\d{4}",
              "[a-zA-Z]{3}\\s{1,2}\\d{1,2},\\s\\d{4}",
              "[a-zA-Z]{3}\\s{1,2}\\d{2}\\s-\\s[a-zA-Z]{3}\\s{2}\\d{1},\\s\\d{4}")
@@ -65,9 +67,10 @@ names(pentNamesRe) <- names(pentScoresRe)
 
 
 # probs need to repeat names(namesRe) thing from above
+# there's some issue when trying to add the 600 and 4x200
 
-indoorEventNames <- c("60", "200", "400", "800", "Mile", "3000", "5000", "60H", "4x400",
-                      "DMR", "HJ", "PV", "LJ", "TJ", "SP", "WT", "Pent", "Hep")
+indoorEventNames <- c("60", "200", "400", "600", "800", "Mile", "3000", "5000", "60H", "4x200",
+                      "4x400", "DMR", "HJ", "PV", "LJ", "TJ", "SP", "WT", "Pent", "Hep")
 outdoorEventNames <- c("100", "200", "400", "800", "1500", "5000", "10000",
                        "100H", "110H", "400H","3000S", "4x100", "4x400",
                        "HJ", "PV", "LJ", "TJ", "SP", "DT", "JT", "Hep", "Dec")
@@ -79,11 +82,13 @@ indoorScoresRe <- c(
     re60 = "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2})",
     re200 = "(?<=\\s{0,1000}+)(\\d{2}\\.\\d{1,2})",
     re400 = "(?<=\\s{0,1000}+)(\\d:){0,1}(\\d{2}\\.\\d{1,2})",
+    re600 = "(?<=\\s{0,1000}+)(\\d:){1}(\\d{2}\\.\\d{1,2})",
     re800 = "(?<=\\s{0,1000}+)(\\d:){1}(\\d{2}\\.\\d{1,2})",
     reMile = "(?<=\\s{0,1000}+)(\\d:){1}(\\d{2}\\.\\d{1,2})",
     re3000 = "(?<=\\s{0,1000}+)((\\d:){1}|(\\d{2}:))(\\d{2}\\.\\d{1,2})",
     re5000 = "(?<=\\s{0,1000}+)(\\d{2}:)(\\d{2}\\.\\d{1,2})",
     re60H = "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2})",
+    re4x200 = "(?<=\\s{0,1000}+)(\\d:){1}(\\d{2}\\.\\d{1,2})",
     re4x400 = "(?<=\\s{0,1000}+)(\\d:){1}(\\d{2}\\.\\d{1,2})",
     reDMR = "(?<=\\s{0,1000}+)(\\d{1,2}:)(\\d{2}\\.\\d{1,2})",
     reHJ = "(?<=\\s{0,1000}+)(\\d{1}\\.\\d{1,2})",

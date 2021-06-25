@@ -10,8 +10,8 @@ source("get_event_funcs.R")
 # check to make sure that other weird events are also downloaded properly
 # oneAthlete <- read_html("https://www.tfrrs.org/athletes/6422180/Notre_Dame/Yared_Nuguse")
 # oneAthlete <- read_html("https://www.tfrrs.org/athletes/6011691/Minnesota/Alec_Basten")
-# oneAthlete <- read_html("https://www.tfrrs.org/athletes/3761344/St_Olaf/Anton_Hesse.html") #it's me lol
-oneAthlete <- read_html("https://www.tfrrs.org/athletes/4680867/Carthage/Dan__Hoffman.html")
+oneAthlete <- read_html("https://www.tfrrs.org/athletes/3761344/St_Olaf/Anton_Hesse.html") #it's me lol
+# oneAthlete <- read_html("https://www.tfrrs.org/athletes/4680867/Carthage/Dan__Hoffman.html")
 
 # at some point all off this should be combined into one function whose argument is just a url
 athleteName <- oneAthlete %>% 
@@ -38,11 +38,11 @@ tables <- oneAthlete %>%
 meets <- grep("\\n\\n\\t", tables, perl = TRUE)
 meetText <- tables[meets] %>% html_text
 
-eventNamesRe <- paste0("(?s)(?<=", allEventNames,"\\n).*")
+eventNamesRe <- paste0("(?s)(?<=\\n", allEventNames,"\\n).*")
 names(eventNamesRe) <- names(allScoresRe)
 
-allMeetRes <- function(x) {
-    browser()
+allMeetRes <- function(x) { # this code only gets finals, not prelims. Fix later?
+    # browser()
     res <- tibble()
     for(meet in meetText) { # outer for loop goes through each meet
         multi <- detectMulti(meet)
