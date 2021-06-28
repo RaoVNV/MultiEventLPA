@@ -129,3 +129,34 @@ getDecScores <- function(x) { # requires full text from each meet, not textAfter
     return(decResThisMeet)
 }
 
+allMeetRes <- function(x) { # this code only gets finals, not prelims. Fix later?
+    # browser()
+    res <- tibble()
+    for(meet in meetText) { # outer for loop goes through each meet
+        multi <- detectMulti(meet)
+        meetName <- str_extract(meet, "(?<=\\n\\n\\t).*")
+        meetDate <- str_extract(meet, reDates)
+        for (event in eventNamesRe) { # inner for loop goes through each event
+            # now we need to search for all variations of the multi events
+            if (!is.null(names(multi))) {
+                multiScores <- getMultiScores(meet, multi)
+                res <- bind_rows(res, multiScores)
+                
+                textBeforeMultiRe <- paste0("(?s).*(?=", str_to_title(names(multi)), ")")
+                meet <- str_extract(meet, textBeforeMultiRe)
+                names(multi) <- NULL
+            }
+            
+            textAfterEvent <- str_extract(meet, event)
+            if (!is.na(textAfterEvent)) {
+                newRow <- getEventScore(textAfterEvent,
+                                        eventNamesRe,
+                                        event,
+                                        meetName,
+                                        meetDate)
+                res <- bind_rows(res, newRow)
+            }
+        }
+    }
+    return(res)
+}
