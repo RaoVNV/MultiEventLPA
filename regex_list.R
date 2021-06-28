@@ -77,6 +77,8 @@ outdoorEventNames <- c("100", "200", "400", "800", "1500", "5000", "10000",
 indoorOnlyEvents <- !(indoorEventNames %in% outdoorEventNames)
 indoorEventNames[indoorOnlyEvents]
 allEventNames <- c(outdoorEventNames, indoorEventNames[indoorOnlyEvents])
+eventNamesRe <- paste0("(?s)(?<=\\n", allEventNames,"\\n).*")
+names(eventNamesRe) <- names(allScoresRe)
 
 indoorScoresRe <- c(
     re60 = "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2})",

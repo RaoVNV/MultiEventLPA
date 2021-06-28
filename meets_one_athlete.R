@@ -5,6 +5,25 @@ library(tidyverse)
 source("regex_list.R")
 source("get_event_funcs.R")
 
+resOneAthlete <- function(url) {
+    htmlPage <- read_html(url)
+    
+    athleteName <- htmlPage %>% 
+        html_nodes("title") %>% 
+        html_text() %>% 
+        str_extract("(?<=\\| ).*") %>% 
+        str_extract(".*(?= - )")
+    
+    tables <- htmlPage %>% 
+        html_nodes("table")
+    meets <- grep("\\n\\n\\t", tables, perl = TRUE)
+    meetText <- tables[meets] %>% html_text
+    
+    return(bind_cols(athleteName, allMeetRes(meetText)))
+}
+
+resOneAthlete("https://www.tfrrs.org/athletes/6997786/Georgia/Karel_Tilga")
+
 # oneAthlete <- read_html("https://www.tfrrs.org/athletes/6997786/Georgia/Karel_Tilga")
 # oneAthlete <- read_html("https://www.tfrrs.org/athletes/6559750/Texas_AM/Tyra_Gittens.html")
 # check to make sure that other weird events are also downloaded properly
@@ -12,14 +31,6 @@ source("get_event_funcs.R")
 # oneAthlete <- read_html("https://www.tfrrs.org/athletes/6011691/Minnesota/Alec_Basten")
 oneAthlete <- read_html("https://www.tfrrs.org/athletes/3761344/St_Olaf/Anton_Hesse.html") #it's me lol
 # oneAthlete <- read_html("https://www.tfrrs.org/athletes/4680867/Carthage/Dan__Hoffman.html")
-
-# at some point all off this should be combined into one function whose argument is just a url
-athleteName <- oneAthlete %>% 
-    html_nodes("title") %>% 
-    html_text() %>% 
-    str_extract("(?<=\\| ).*") %>% 
-    str_extract(".*(?= - )")
-athleteName
 
 # Getting lists of athletes:
 # https://www.tfrrs.org/results_search.html meet results
@@ -37,9 +48,6 @@ tables <- oneAthlete %>%
     html_nodes("table")
 meets <- grep("\\n\\n\\t", tables, perl = TRUE)
 meetText <- tables[meets] %>% html_text
-
-eventNamesRe <- paste0("(?s)(?<=\\n", allEventNames,"\\n).*")
-names(eventNamesRe) <- names(allScoresRe)
 
 allMeetRes <- function(x) { # this code only gets finals, not prelims. Fix later?
     # browser()
@@ -69,6 +77,4 @@ allMeetRes <- function(x) { # this code only gets finals, not prelims. Fix later
     return(res)
 }
 
-meetRes <- allMeetRes(meetText)
-meetRes %>% View
-
+allMeetRes(meetText)
