@@ -1,5 +1,5 @@
 ---
-title: "Paper Draft"
+title: "A Latent Profile Growth Analysis of Combined Track and Field Athletes"
 author: Anton Hesse and V.N. Vimal Rao
 output: html_document
 ---
@@ -11,9 +11,20 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Introduction
 
+At the 2017 World Championships in Athletics, Nafissatou Thiam of Belgium won the women's heptathlon in part by scoring the highest point total in the High Jump, Long Jump, and Shot Put events, and the second highest point total in the Javelin Throw. Two years later at the 2019 World Championships, Katarina Johnson-Thompson of Great Britain and Northern Ireland won the competition by scoring the highest point total in the 200 meters, 800 meters, Long Jump, and High Jump events -- Thiam finished in second. Both of these champion athletes achieved their victories by strong performances in different combinations of events. This is not a reflection of the varying effectiveness of strategies -- both of their personal best point totals are near 7000 points. Instead, Thiam and Johnson-Thompson appear to typify different phenotypes of world-caliber heptathletes, 'jumper-thrower' and 'jumper-runner' respectively. 
+
+Many scholars have examined the performances of multi-event athletes, particularly in the decathlon and heptathlon. These have included correlational analyses to investigate how scores in each constituent event are related (e.g., Majchrzak et al., 2010), 
+cluster analyses to identify groups of events in the competitions for which scores are strongly correlated (e.g., Cox and Dunn, 2002), and latent factor analyses to identify patterns in physiological characteristics of top athletes (e.g., Bilic, 2015; Heazlewood et al., 2014; Linden, 1977). As simultaneous specialization in all constituent events is impractical if not impossible (Tidow, 2000; Van Damme et al., 2002), some scholars have interpreted patterns in the relationships between event scores of top athletes in terms of the training regimens that may produce world class multi-event athletes (e.g., Kenny et al., 2005). Some scholars have interpreted results from factor analytic methods such as principal components analysis as patterns in terms of athlete phenotypes, such as 'runner-thrower' or 'thrower-jumper' (e.g., Pavlović & Idrizović, 2017). 
+
+However, to date no longitudinal analysis of multi-event athletes' performances has been conducted, nor has an analysis of the performance of an athlete relative to their phenotype been performed. In order to better understand the patterns in physiological traits of world class multi-event athletes, and to understand their development, this paper describes a latent profile growth analysis on multi-event athletes' at both the collegiate level and the international level. 
+
 # Background
 
 # Methods
+
+## Data
+
+## Statistical Method
 
 # Results
 
