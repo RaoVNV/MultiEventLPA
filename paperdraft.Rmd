@@ -22,18 +22,46 @@ However, to date no longitudinal analysis of multi-event athletes' performances 
 
 ## What are the events? 
 
-## The physiological demands
+## The physiological demands (Anton)
 
-## Analyses People have done
+## Analyses People have done, and Gaps in the research.
 
-## Gaps in the research and our RQ
+- people have long analyzed patterns in the performance of events. 
+    - clustering, factor analysis, correlation analysis, pca
+    - most models indicate 1500m is its own thing, SP JT DT are related, and the spring events are related (with some separating the PV HJ and LJ from the 100m 400m and 110mh)
+    - some have interpreted this in terms of the characteristics of athletes, i.e. profiles, and some have interpreted this in terms of the physiological characteristics, i.e., latent traits.
+    
+- Wimmer et al 2011 considered the effect of age and month of the meet as covariates on the latent factors. the latent factors were interpreted in terms of the physiological skills. athletes' factor scores changed with age. 
+
+- no multivariate analysis of how latent factor scores co-vary across time, or how different profiles' latent scores grow differently over time. furthermore, Wimmer et al included few athletes below the age of 20. therefore, for these important developmental years, we do not know how athletes grow, or if its possible to identify those with the potential to become world champion athletes. 
+
+### RQ
+
+- How do athletes' multi-event scores change over time, and differences exist within or between those with different physiological profiles?
+- What patterns in athletes' multi-event scores are detectable between collegiate athletes? 
 
 # Methods
 
+- we're assuming classes/profiles are stable
+
+- during college, you're learning technique, so while classes are static, we might not see that variation. it takes time to develop into the class. 
+
 ## Data
 
-## Statistical Method
+## Statistical Method (Corissa)
+
+(1) Classify IAAF best on "peak performance"
+(2) Match IAAF peeps to TIFFRS data, analyze growth trajectories
+(3) Classify TIFFRS to see how that looks
 
 # Results
+
+## RQ1: Classify IAAF
+
+- graph showing difference in mean profile, and then plot a single person, see how they line up
+
+## RQ2: Growth Trajectory
+
+## RQ3: Classify TIFFRS
 
 # Discussion

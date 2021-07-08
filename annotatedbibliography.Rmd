@@ -118,7 +118,7 @@ Findings:
 
 Title: Determination of taxonomic type structures of top decathlon athletes
 <br>
-Citation: Bilić, M. (2015). Determination of taxonomic type structures of top decathlon athlets. Acta Kinesiologica, 9(1), 20-23.
+Citation: Bilić, M. (2015). Determination of taxonomic type structures of top decathlon athletes. Acta Kinesiologica, 9(1), 20-23.
 <br>
 <br>
 Data: Top 100 performances all time? Compared to a Senior list of 350 performances? (*this paper is hard to read, its translation into english is poor*)
@@ -132,6 +132,7 @@ Findings:
 
 - Three profiles. Top one is a dominating sprint-jump qualities. Throwers and endurance profile is the worst. 
 - This paper has some stuff about aerobic-anaerobic systems that I can't quite make out both due to content knowledge and the poor quality of translation ...
+- Successful athletes in terms of their aptitude and motor skills
 
 ## Brodani et al. (2020)
 
@@ -435,18 +436,159 @@ Journal of Beijing University of Physical Education,2004,24(8):
 1135-1136.
 
 
+## Dziadek et al. (2018)
+
+Title: Principal component analysis in the study of structure of the best polish decathlon competitors from the period between 1985-2015
+<br>
+Citation: Dziadek, B., Iskra, J., & Przednowek, K. (2018). Principal Component Analysis in the Study of Structure of the Best Polish Decathlon Competitors from the Period between 1985–2015. Central European Journal of Sport Sciences and Medicine, 23, 77-87.
+<br>
+<br>
+Data: Career data from the top 25 Polish decathletes
+<br>
+RQ: Patterns occuring between each event and the final results
+<br>
+<br>
+Methods: PCA
+<br>
+Findings: 
+
+- spring events are correlated with eachother, as are LJ and PV
+- "scientific research of decathlon’s structure turned out to be crucial, as it could assist the competitors and trainers in optimising the training process" (p. 78)
+- correlation matrices and factors maps -- cool visuals
+
+## Stemmler & Baumler (2005)
+
+Title: **Find this paper**
+<br>
+Citation: Stemmler, M., Bäumler, G. (2005). The Detection of Types among Decathletes using Configural Frequency Analysis (CFA). Psychology
+Science, 47 (3/4), 447–466.
+<br>
+<br>
+Data: 
+<br>
+RQ: 
+<br>
+<br>
+Methods: PCA
+<br>
+Findings: 
+
+- physiological charateristics?
+
+## Ertel (2011)
+
+Title: **Find this paper**
+<br>
+Citation: Ertel, S. (2011). Exploratory factor analysis revealing complex structure. Elsevier, 50 (2),196–200.
+<br>
+<br>
+Data: 
+<br>
+RQ: 
+<br>
+<br>
+Methods: PCA
+<br>
+Findings: 
+
+- hidden structure
+
+
+## Furdal (1986)
+
+Title: **Find this paper**
+<br>
+Citation: Furdal, S. (1986). Analizy modelowe wyników w dziesięcioboju. Warszawa: Raport Instytutu Sportu
+<br>
+<br>
+Data: 
+<br>
+RQ: 
+<br>
+<br>
+Methods: PCA
+<br>
+Findings: 
+
+- 
+
+## Wimmer et al. (2011)
+
+Title: Exploring Competition Performance in Decathlon Using Semi-Parametric Latent Variable Models
+<br>
+Citation: Wimmer, V., Fenske, N., Pyrka, P., & Fahrmeir, L. (2011). Exploring competition performance in decathlon using semi-parametric latent variable models. Journal of Quantitative Analysis in Sports, 7(4).
+<br>
+<br>
+Data: 3103 results from 1998-2009, age of participants
+<br>
+RQ: what is the effect of age on latent abilities? 
+<br>
+<br>
+Methods: semi-parametric latent variable models
+<br>
+Findings: 
+
+- first study of covariate information (i.e., age)
+- after adjusting for age, there are four latent factors standing for sprint, jumping, throwing, and endurance abilities
+- between age 20 and 35: 
+    - throwing abilities increase with age
+    - jumping abilities increase some with age
+    - spring abilities mostly flat with age until age 30
+    - endurance abilities mostly flat with age
+- "In comparison to previous analyses, our results confirm the grouping
+structure of decathlon disciplines found by Woolf et al. (2007) or Schomaker
+and Heumann (2011). Yet, we also used data from non-elite athletes who
+achieved less than 7500 total points. Thus, we conclude that the grouping
+structure does not seem to depend on the total points but is true for a large
+number of athletes." (p. 17)
+- **be sure to discuss this study!!**
+
+
+## Schomaker and Heumann (2011)
+
+Title: Model Averaging in Factor Analysis: An Analysis of Olympic Decathlon Data
+<br>
+Citation: Schomaker, M. and C. Heumann (2011): “Model averaging in factor analysis:
+An analysis of olympic decathlon data,” Journal of Quantitative Analysis in
+Sports, 7.
+<br>
+<br>
+Data: 30 athletes from the 2004 olympics
+<br>
+RQ: what is the dimension of decathlon competitions
+<br>
+<br>
+Methods: likelihood factor analysis
+<br>
+Findings: 
+
+- athletes with great leg speed who performed well in 100m, 400m, and 110mh. Athletes who perform well in throwing events because of arm strength. Suggest presence of a few latent factors explaining performance. 
+- factor 1 is 100 400 100 and negative LJ, 'speed-and-athletic' component
+- factor 2 is SP HJ and DT. 'strength-and-technique' component
+- factor 3 is 1500m, 'endurance'
+- JT and PV don't really fit with any factors, maybe because they are sophisticated. 
+
+
+## Bilic et al. (2015)
+
+Title: CONTRIBUTION TO DISCIPLINE DECATHLON TOTAL SCORE RESULTS IN RELATION TO DECATHLON AGE AND RESULT-LEVEL 
+<br>
+Citation: Bilić, M., Smajlovic, N., & Balić, A. (2015). Contribution to discipline decathlon total score results in relation to decathlon age and result-level. Acta Kinesiologica, 9(1), 66-69.
+<br>
+<br>
+Data: junior (n=150) and senior (n=350) data from IAAF 
+<br>
+RQ: *this paper is a bit hard to read*
+<br>
+<br>
+Methods: regression
+<br>
+Findings: 
+
+- "junior decatchlon categories show a slightly different structure view of disciplines" than the senior athletes (p. 67)
+- scores are a function of natural abilities and also technical preparedness. 
+
 ## Next up links
-
-### internal structure
-https://wnus.edu.pl/cejssm/file/article/view/14672.pdf
-https://www.researchgate.net/profile/Ratko-Pavlovic-2/publication/318226224_Factor_analysis_of_world_record_holders_in_athletic_decathlon/links/595df26fa6fdcc6d855d5396/Factor-analysis-of-world-record-holders-in-athletic-decathlon.pdf
-https://www.degruyter.com/document/doi/10.2202/1559-0410.1249/html
-https://www.researchgate.net/profile/Nora-Fenske-2/publication/227378903_Exploring_Competition_Performance_in_Decathlon_Using_Semi-Parametric_Latent_Variable_Models/links/556b309808aeccd7773a18de/Exploring-Competition-Performance-in-Decathlon-Using-Semi-Parametric-Latent-Variable-Models.pdf
-
-https://publications.waset.org/13614/multivariate-statistical-analysis-of-decathlon-performance-results-in-olympic-athletes-1988-2008
-http://www.actakin.com/PDFS/BR0901/SVEE/04%20CL%2011%20MB.pdf
-https://www.tandfonline.com/doi/pdf/10.1080/10671315.1977.10615462?casa_token=nAw1jHFFGDsAAAAA:VLKJlqBEe0ou-3iCfE-ZbpGmfrVQ1bhkAW9G7ZS-177MW9VMJstkSJ6WUbkCyPhpb7VlkojU2M0
-https://files.eric.ed.gov/fulltext/ED175821.pdf
 
 ### injuries and training
 https://bjsm.bmj.com/content/45/4/346.1.short
@@ -454,6 +596,7 @@ https://pubsonline.informs.org/doi/pdf/10.1287/opre.1080.0616?casa_token=SEskYTh
 https://www.sciencedirect.com/science/article/abs/pii/S0765159710001607
 https://www.sciencedirect.com/science/article/abs/pii/S1350449515300815?casa_token=JqoSpELGxQcAAAAA:ZCUpdhR47OrCPGazdsEtrUVr4oxHTG9Sz2XccDKQeEHkjHqBrgdllu1mtiobZTrtt_jsywAr
 https://www.sciencedirect.com/science/article/abs/pii/S0765159712000615
+
 
 ### scoring systems
 
@@ -481,8 +624,14 @@ Findings:
 -
 
 ## Next up Links
-
-
+- https://www.mdpi.com/2075-4663/4/1/12/pdf
+- https://journals.ekb.eg/article_70742_4ef26bf9ef9ffca53fbb2d1027b8c8ac.pdf
+- https://www.researchgate.net/profile/Michael-Froehlich-4/publication/279976560_Zur_Strukturanalyse_des_Mehrkampfs_in_der_Leichtathletik_Eine_empirische_Studie_zum_Zusammenhang_von_Leistung_und_Erfolg_im_Siebenkampf_der_Frauen_und_Zehnkampf_der_Manner/links/55a7c7f108ae5aa1579d83ff/Zur-Strukturanalyse-des-Mehrkampfs-in-der-Leichtathletik-Eine-empirische-Studie-zum-Zusammenhang-von-Leistung-und-Erfolg-im-Siebenkampf-der-Frauen-und-Zehnkampf-der-Maenner.pdf#page=10
+- https://elibrary.ru/item.asp?id=40804956
+- https://content.iospress.com/articles/journal-of-sports-analytics/jsa200351
+- http://www.pf.jcu.cz/stru/katedry/tv/studia_kinantropologica/documents/magazine/SK_vol_21_2020_2.pdf#page=27
+- https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.1060.9471&rep=rep1&type=pdf
+- http://centrostudilombardia.com/wp-content/uploads/IAAF-Prove-Multiple/2003-Training-women-for-the-Heptathlon.pdf
 
 # Pentathlon
 
@@ -506,9 +655,19 @@ Findings:
 -
 
 ## Next up Links
+- https://elib.gsu.by/bitstream/123456789/13375/3/%D0%A1%D0%B5%D0%B2%D0%B4%D0%B0%D0%BB%D0%B5%D0%B2_%D0%92%D1%80%D1%83%D0%B1%D0%BB%D0%B5%D0%B2%D1%81%D0%BA%D0%B8%D0%B9_%D0%9A%D0%BE%D0%B6%D0%B5%D0%B4%D1%83%D0%B1_9%2828%29_2020.pdf
+- https://www.mdpi.com/2075-4418/10/10/833/pdf
+- https://www.tandfonline.com/doi/pdf/10.1080/02640414.2010.497816?casa_token=m0c2Xq4wOwkAAAAA:a93O7ePJFbvRZf_5moo1-L8bMTYsG11YM1JuzvUHOGbYX8GyguhDNbSBxqffLxCDvtlV4thSdVg
+- https://www.tandfonline.com/doi/pdf/10.1080/02640419408732186?casa_token=Kn-DFg8-Gx8AAAAA:taiQ5X_f4bEYCGXpUCMjTh4u7fra2p3Gd6lQcb2ZAo1XscROa23PX5BnBGG9s7JNvOb26RYPOxg
+- http://www.sportmont.ucg.ac.me/clanci/SM_October_2020_Ledynakl.pdf
+http://web.b.ebscohost.com/ehost/pdfviewer/pdfviewer?vid=0&sid=ca243312-0d4f-448e-9fb0-1899b851bdb2%40sessionmgr102
+- 
 
 
-# Template
+
+# Physio and training
+
+## Template
 
 Title: 
 <br>
@@ -526,3 +685,6 @@ Findings:
 
 -
 -
+
+## Next up Links
+- https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6682536/
