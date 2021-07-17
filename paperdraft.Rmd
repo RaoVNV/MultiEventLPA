@@ -38,7 +38,7 @@ However, to date no longitudinal analysis of multi-event athletes' performances 
 ### RQ
 
 - How do athletes' multi-event scores change over time, and differences exist within or between those with different physiological profiles?
-- What patterns in athletes' multi-event scores are detectable between collegiate athletes? 
+- What patterns in athletes' multi-event scores are detectable between collegiate athletes? (predictive power?)
 
 # Methods
 
@@ -65,3 +65,5 @@ However, to date no longitudinal analysis of multi-event athletes' performances 
 ## RQ3: Classify TIFFRS
 
 # Discussion
+
+Dont forget to talk to Anton's coach! 
