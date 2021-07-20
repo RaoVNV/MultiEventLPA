@@ -132,7 +132,7 @@ getDecScores <- function(x) { # requires full text from each meet, not textAfter
 allMeetRes <- function(x) { # this code only gets finals, not prelims. Fix later?
     # browser()
     res <- tibble()
-    for(meet in meetText) { # outer for loop goes through each meet
+    for(meet in x) { # outer for loop goes through each meet
         multi <- detectMulti(meet)
         meetName <- str_extract(meet, "(?<=\\n\\n\\t).*")
         meetDate <- str_extract(meet, reDates)
