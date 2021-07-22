@@ -458,40 +458,44 @@ Findings:
 
 ## Stemmler & Baumler (2005)
 
-Title: **Find this paper**
+Title: The Detection of Types among Decathletes using Configural Frequency Analysis
 <br>
 Citation: Stemmler, M., Bäumler, G. (2005). The Detection of Types among Decathletes using Configural Frequency Analysis (CFA). Psychology
 Science, 47 (3/4), 447–466.
 <br>
 <br>
-Data: 
+Data: 514 athletes, top 100 from each year between 1984 and 2000, each of their best score across all years. 
 <br>
-RQ: 
+RQ: is there empirical evidence of 'types' of decathletes
 <br>
 <br>
-Methods: PCA
+Methods: configural frequency analysis / PCA
 <br>
 Findings: 
 
-- physiological charateristics?
+- "an explorative CFA with all ten decathlon events would have required a sample size of more than 5000 subjects (the exact number would be 5× 210 = 5×1024 = 5120 subjects). This formula calculates the required minimum expected frequency for the Pearsons’s chi-square test statistic which needs the minimum of five subjects per cell; other commonly used test statistics in CFA need less expected frequencies per cell, however, this formula gives you a reasonable estimate of the required optimal sample size." (p. 449)
+- PCA says four factor solution: sprint (100m, LJ, 400m, 100mh), throwing (SP, DT, JT), jumping (HJ, PV, LJ, 110mh), and stamina (400m, 1500m)
+- five or six main types based on similiarites (see page 464): allright, sprinter-thrower, thrower-stamina, thrower, runner. allrounders have the highest scores. 
+- **discuss this paper**
 
 ## Ertel (2011)
 
-Title: **Find this paper**
+Title: Exploratory factor analysis revealing complex structure
 <br>
 Citation: Ertel, S. (2011). Exploratory factor analysis revealing complex structure. Elsevier, 50 (2),196–200.
 <br>
 <br>
-Data: 
+Data: Re-analysis of Zamowski (1989). 233 athletes from 11 olympic games from 1948-1988. 
 <br>
-RQ: 
+RQ: Varimin rotation PCA. 
 <br>
 <br>
 Methods: PCA
 <br>
 Findings: 
-
-- hidden structure
+- three varimin factors: (1) general, (2) pacing, i.e., explosive energy v endurance (100m, LJ, SP, 110mh, DT, -1500m), (3) locus of energy, i.e., arms v legs (100m, 400m, 110mh, -SP, -DT, -JT)
+- factorially conceivable in terms of body demands, instead of discipline homogeneity
+- **discuss this**
 
 
 ## Furdal (1986)
@@ -511,6 +515,23 @@ Methods: PCA
 Findings: 
 
 - 
+
+## Zwols & Sierksma (2009)
+
+Title: **READ this paper**
+<br>
+Citation: Zwols, Y., & Sierksma, G. (2009). OR Practice—Training Optimization for the Decathlon. Operations research, 57(4), 812-822.
+<br>
+<br>
+Data: 
+<br>
+RQ: 
+<br>
+<br>
+Methods: Training optimization, based on score prediction, and profiling??!
+<br>
+Findings: 
+
 
 ## Wimmer et al. (2011)
 
@@ -591,14 +612,24 @@ Findings:
 ## Next up links
 
 ### injuries and training
-https://bjsm.bmj.com/content/45/4/346.1.short
-https://pubsonline.informs.org/doi/pdf/10.1287/opre.1080.0616?casa_token=SEskYThqpdkAAAAA%3AwLtb2WIhnfYfc6yNXMn7ff4-XlYBDPYf3hyB_j2SGghnGu2H8gqw3zGh_MLNZhxQqgX840M-&
-https://www.sciencedirect.com/science/article/abs/pii/S0765159710001607
-https://www.sciencedirect.com/science/article/abs/pii/S1350449515300815?casa_token=JqoSpELGxQcAAAAA:ZCUpdhR47OrCPGazdsEtrUVr4oxHTG9Sz2XccDKQeEHkjHqBrgdllu1mtiobZTrtt_jsywAr
-https://www.sciencedirect.com/science/article/abs/pii/S0765159712000615
 
+Edouard et al. (2011):
+- Citation: Edouard, P., Morin, J. B., Pruvost, J., & Kerspern, A. (2011). Injuries in high-level heptathlon and decathlon. British journal of sports medicine, 45(4), 346-346.
+- Link: https://bjsm.bmj.com/content/45/4/346.1.short
+- Gist: Multi-event sports are demaning on athletes bodies, injuries are common during training and competition. 
+
+Mihailescu (2011):
+- Citation: Mihailescu, L. (2011). The performance optimization in the decathlon event by mental training operationalization. Ovidius University Annals, Physical Education and Sport/Science, Movement and Health Series, 11(2 Suppl.), 385-390.
+- Gist: mental training and attitudes for performance optionation. Use this as a soft intro to Zwols and Sierksma
+
+Adamczyk et al. (2016):
+- Citation: Adamczyk, J. G., Olszewska, M., Boguszewski, D., Białoszewski, D., & Reaburn, P. (2016). Is it possible to create a thermal model of warm-up? Monitoring of the training process in athletic decathlon. Infrared Physics & Technology, 76, 555-559.
+- Gist: High-performing competitors demonstrate higher variability in skin temperatures depending on the event being prepared for. 
+- **Anton read this**
 
 ### scoring systems
+
+Stay away from this, aside from talking about the implications on methods and results for using scores or actual performance metrics. 
 
 - Barrow, J. (2014). Decathlon: The Art of Scoring Points. 50 Visions of Mathematics, 11-15.
 
