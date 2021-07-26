@@ -7,7 +7,7 @@ library(tidyverse)
 source("regex_list.R")
 source("get_event_funcs.R")
 
-resOneAthlete <- function(url) {
+resOneAthlete <- function(url, sex) {
     htmlPage <- read_html(url)
     # browser()
     athleteName <- htmlPage %>% 
@@ -21,8 +21,10 @@ resOneAthlete <- function(url) {
     meets <- grep("\\n\\n\\t", tables, perl = TRUE)
     meetText <- tables[meets] %>% html_text
     
-    return(bind_cols(name = athleteName, allMeetRes(meetText)))
+    return(bind_cols(name = athleteName, sex = sex, allMeetRes(meetText)))
 }
+
+resOneAthlete("https://www.tfrrs.org/athletes/1253992/Lewis/Pat_Reaney.html", "m")
 
 # resOneAthlete("https://www.tfrrs.org/athletes/6422180/Notre_Dame/Yared_Nuguse")
 # resOneAthlete("https://www.tfrrs.org/athletes/3761344/St_Olaf/Anton_Hesse.html")
