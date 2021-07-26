@@ -18,9 +18,9 @@ vectorIsNotEmpty <- function(x) {return(!(length(x) == 0))}
 
 detectMulti <- function(x) {
     # browser()
-    pent <- str_which(x, "Pent\\n")
-    hep <- str_which(x, "Hep\\n")
-    dec <- str_which(x, "Dec\\n")
+    pent <- str_which(x, "Pent\\n{4,}") # 4 or more required because some meet names have hep and dec in tht title
+    hep <- str_which(x, "Hep\\n{4,}")
+    dec <- str_which(x, "Dec\\n{4,}")
     
     if(any(length(c(pent, hep, dec) > 0))) {
         idx <- which(map(list(pent, hep, dec), vectorIsNotEmpty) == TRUE)
@@ -70,6 +70,22 @@ getHepScores <- function(x) { # requires full text from each meet, not textAfter
     # browser()
     hepScores = character()
     eventNames <- hepEventMNames
+    if(length(str_which(x, "\\n55\\n")) > 0) {
+        hepEventMNames <- c("1000", "55", "LJ", "SP", "HJ", "55H", "PV")
+        hepNamesMRe <- paste0("(?s)(?<=", hepEventMNames,"\\n).*")
+        hepScoresMRe <- c(
+            re1000 = "(?<=\\s{0,1000}+)(\\d:){1}(\\d{2}\\.\\d{1,2})",
+            re55 = "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2})",
+            reLJ = "(?<=\\s{0,1000}+)(\\d{1}\\.\\d{1,2})",
+            reSP = "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2})",
+            reHJ = "(?<=\\s{0,1000}+)(\\d{1}\\.\\d{1,2})",
+            re55H = "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2})",
+            rePV = "(?<=\\s{0,1000}+)(\\d{1}\\.\\d{1,2})"
+        )
+        names(hepNamesMRe) <- names(hepScoresMRe)
+    } else {
+        source("regex_list.R")
+    }
     # there's a problem if the athlete ran a 55 or 55H instead of a 60 or 60H
     for (hepEventM in hepEventMNames) {
         hepEventMRe <- hepNamesMRe[str_which(names(hepNamesMRe), paste0(hepEventM,"$"))]
@@ -159,4 +175,21 @@ allMeetRes <- function(x) { # this code only gets finals, not prelims. Fix later
         }
     }
     return(res)
+}
+
+resOneAthlete <- function(url, sex) {
+    htmlPage <- read_html(url)
+    # browser()
+    athleteName <- htmlPage %>% 
+        html_nodes("title") %>% 
+        html_text() %>% 
+        str_extract("(?<=\\| ).*") %>% 
+        str_extract(".*(?= - )")
+    
+    tables <- htmlPage %>% 
+        html_nodes("table")
+    meets <- grep("\\n\\n\\t", tables, perl = TRUE)
+    meetText <- tables[meets] %>% html_text
+    
+    return(bind_cols(name = athleteName, sex = sex, allMeetRes(meetText)))
 }
