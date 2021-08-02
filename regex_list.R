@@ -27,15 +27,17 @@ names(decNamesRe) <- names(decScoresRe)
 
 hepScoresMRe <- c(
     re1000 = "(?<=\\s{0,1000}+)(\\d:){1}(\\d{2}\\.\\d{1,2})",
+    re55 = "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2})",
     re60 = "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2})",
     reLJ = "(?<=\\s{0,1000}+)(\\d{1}\\.\\d{1,2})",
     reSP = "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2})",
     reHJ = "(?<=\\s{0,1000}+)(\\d{1}\\.\\d{1,2})",
+    re55H = "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2})",
     re60H = "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2})",
     rePV = "(?<=\\s{0,1000}+)(\\d{1}\\.\\d{1,2})"
 )
 
-hepEventMNames <- c("1000", "60", "LJ", "SP", "HJ", "60H", "PV")
+hepEventMNames <- c("1000", "55", "60", "LJ", "SP", "HJ", "55H", "60H", "PV")
 hepNamesMRe <- paste0("(?s)(?<=", hepEventMNames,"\\n).*")
 names(hepNamesMRe) <- names(hepScoresMRe)
 

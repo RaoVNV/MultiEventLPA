@@ -41,8 +41,7 @@ getMeetLinks <- function(x) {
 isThereMulti <- function(url) { # detects if the webpage references multi events
     res <- read_html(url) %>% 
         html_nodes("table") %>% 
-        tolower() %>% 
-        str_which("heptathlon|pentathlon|decathlon|multi")
+        str_which(regex("heptathlon|pentathlon|decathlon|multi", ignore_case = TRUE))
     if(length(res) > 0) {
         return(TRUE)
     } else {
@@ -55,21 +54,20 @@ getMultiLinks <- function(url) { # gets url's to mutl event result pages
         html_nodes("table") %>% 
         html_nodes("a") %>% 
         html_text() %>% 
-        tolower() %>% 
-        str_which("heptathlon|pentathlon|decathlon|multi")
+        str_which(regex("heptathlon|pentathlon|decathlon|multi",
+                        ignore_case = TRUE))
     
     eventLinks <- read_html(url) %>% 
         html_nodes("table") %>% 
         html_nodes("a") %>% 
         html_attr("href")
     
-    meetPageLinks <- eventLinks[multiLinkText] %>% 
-        tolower()
+    meetPageLinks <- eventLinks[multiLinkText]
     
-    pent <- str_which(meetPageLinks, "pentathlon")
-    hep <- str_which(meetPageLinks, "heptathlon") #get men's vs. women's here?
-    dec <- str_which(meetPageLinks, "decathlon")
-    multi <- str_which(meetPageLinks, "multi")
+    pent <- str_which(meetPageLinks, regex("pentathlon", ignore_case = TRUE))
+    hep <- str_which(meetPageLinks, regex("heptathlon", ignore_case = TRUE))
+    dec <- str_which(meetPageLinks, regex("decathlon", ignore_case = TRUE))
+    multi <- str_which(meetPageLinks, regex("multi", ignore_case = TRUE))
     
     linksToMulti <- c(pent, hep, dec, multi)[which(c(pent, hep, dec, multi) > 0)]
     multiLinks <- meetPageLinks[linksToMulti] %>% 
@@ -82,15 +80,17 @@ getMultiLinks <- function(url) { # gets url's to mutl event result pages
 }
 
 mOrW <- function(url) { # determines if results page is for men's vs. women's
+    # browser()
     h3Text <- read_html(url) %>%
         html_nodes("h3") %>%
         html_text() %>%
-        tolower() %>%
-        str_extract("women's|men's") %>% 
+        str_extract(regex("women's\\s|women\\s|men's\\s|men\\s", ignore_case = TRUE)) %>% 
         unique() %>% 
         na.omit()
     
-    if(h3Text == "women's") {
+    if (length(h3Text) == 0) {
+        sex = NA
+    } else if (h3Text == "Women's") {
         sex = as.factor("w")
     } else {
         sex = as.factor("m")
@@ -105,7 +105,7 @@ getAthleteLinks <- function(x) { # input is vector of url's
     linkList <- tibble(link = character(), sex = factor())
     for (i in 1:length(x)) {
         pb$tick()
-        url <- small[i]
+        url <- x[i]
         if (isThereMulti(url) == FALSE) {
             next()
             # skip the rest of this loop and go to the next url
@@ -124,7 +124,8 @@ getAthleteLinks <- function(x) { # input is vector of url's
                 str_replace_all("/\\n", "") %>%
                 str_replace("www", "https://www")
             sex <- mOrW(links)
-            res <- tibble(link = athleteLinks, sex = rep(sex, length(athleteLinks)))
+            res <- tibble(link = athleteLinks,
+                          sex = as.factor(rep(sex, length(athleteLinks))))
             
             linkList <- bind_rows(linkList, res)
         }
@@ -132,8 +133,11 @@ getAthleteLinks <- function(x) { # input is vector of url's
     return(linkList)
 }
 
-getMultiRes <- function(x) { # input is vector of athlete url's
+getMultiRes <- function(x) { # input data frame with links and sex
     # browser()
+    if(ncol(x) != 2) {
+        stop("Input requires a data frame with two columns!")
+    }
     pb <- progress_bar$new(total = nrow(x))
     res <- tibble(name = character(),
                   sex = factor(),

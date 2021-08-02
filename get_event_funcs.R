@@ -16,11 +16,18 @@ getEventScore <- function(x, eventNamesRe, event, meetName, meetDate) {
 
 vectorIsNotEmpty <- function(x) {return(!(length(x) == 0))}
 
-detectMulti <- function(x) {
+detectMulti <- function(x, sex) {
     # browser()
-    pent <- str_which(x, "Pent\\n{4,}") # 4 or more required because some meet names have hep and dec in tht title
-    hep <- str_which(x, "Hep\\n{4,}")
-    dec <- str_which(x, "Dec\\n{4,}")
+    # if else statements required b/c there are some entry errors where a male had a pent and hep entry
+    if(sex == "w") {
+        pent <- str_which(x, "Pent\\n{4,}") # 4 or more required because some meet names have hep and dec in tht title
+        hep <- str_which(x, "Hep\\n{4,}")
+        dec <- character()
+    } else {
+        pent <- character()
+        hep <- str_which(x, "Hep\\n{4,}")
+        dec <- str_which(x, "Dec\\n{4,}")
+    }
     
     if(any(length(c(pent, hep, dec) > 0))) {
         idx <- which(map(list(pent, hep, dec), vectorIsNotEmpty) == TRUE)
@@ -31,12 +38,12 @@ detectMulti <- function(x) {
     }
 }
 
-getMultiScores <- function(x, event) {
+getMultiScores <- function(x, event, sex) {
     # browser()
     multiScores <- character()
     multi <- match.arg(names(event), choices = c("pent", "hep", "dec"))
     switch(multi, pent = getPentScores(x),
-           hep = getHepScores(x),
+           hep = getHepScores(x, sex),
            dec = getDecScores(x))
 }
 
@@ -65,49 +72,46 @@ getPentScores <- function(x) { # requires full text from each meet, not textAfte
     return(pentResThisMeet)
 }
 
-
-getHepScores <- function(x) { # requires full text from each meet, not textAfterMeet
+# need to write more code so that when the event is a 55, 60, 55H, or 60H that we find the exact one that it is
+getHepScores <- function(x, sex) { # requires full text from each meet, not textAfterMeet
     # browser()
     hepScores = character()
-    eventNames <- hepEventMNames
-    if(length(str_which(x, "\\n55\\n")) > 0) {
-        hepEventMNames <- c("1000", "55", "LJ", "SP", "HJ", "55H", "PV")
-        hepNamesMRe <- paste0("(?s)(?<=", hepEventMNames,"\\n).*")
-        hepScoresMRe <- c(
-            re1000 = "(?<=\\s{0,1000}+)(\\d:){1}(\\d{2}\\.\\d{1,2})",
-            re55 = "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2})",
-            reLJ = "(?<=\\s{0,1000}+)(\\d{1}\\.\\d{1,2})",
-            reSP = "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2})",
-            reHJ = "(?<=\\s{0,1000}+)(\\d{1}\\.\\d{1,2})",
-            re55H = "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2})",
-            rePV = "(?<=\\s{0,1000}+)(\\d{1}\\.\\d{1,2})"
-        )
-        names(hepNamesMRe) <- names(hepScoresMRe)
-    } else {
-        source("regex_list.R")
-    }
-    # there's a problem if the athlete ran a 55 or 55H instead of a 60 or 60H
-    for (hepEventM in hepEventMNames) {
-        hepEventMRe <- hepNamesMRe[str_which(names(hepNamesMRe), paste0(hepEventM,"$"))]
-        textAfterEvent <- str_extract(x, hepEventMRe)
-        if(is.na(textAfterEvent)) { # if true, this is a female athlete
-            for (hepEventW in hepEventWNames) {
-                hepEventWRe <- hepNamesWRe[str_which(hepNamesWRe, hepEventW)]
-                textAfterEvent <- str_extract(x, hepEventWRe)
-                hepScores[hepEventW] <- str_extract(textAfterEvent,
-                                                    hepScoresWRe[names(hepEventWRe)])
-            }
-            eventNames <- hepEventWNames
-            break
-        } else {
-            hepScores[hepEventM] <- str_extract(textAfterEvent,
-                                                 hepScoresMRe[names(hepEventMRe)])
+    if(sex == "w") {
+        eventNames <- hepEventWNames
+        for (hepEventW in hepEventWNames) {
+            hepEventWRe <- hepNamesWRe[str_which(hepNamesWRe, hepEventW)]
+            textAfterEvent <- str_extract(x, hepEventWRe)
+            hepScores[hepEventW] <- str_extract(textAfterEvent,
+                                                hepScoresWRe[names(hepEventWRe)])
         }
+        eventNames <- hepEventWNames
+    } else {
+        for (hepEventM in hepEventMNames) {
+            if (hepEventM == "55" | hepEventM == "60") {
+                hepEventM <- str_extract(x, "55\\n|60\\n") %>% 
+                    str_replace("\\n", "")
+            } else if (hepEventM == "55H" | hepEventM == "60H") {
+                hepEventM <- str_extract(x, "55H\\n|60H\\n") %>% 
+                    str_replace("\\n", "")
+            }
+            hepEventMRe <-
+                hepNamesMRe[str_which(names(hepNamesMRe), paste0(hepEventM, "$"))]
+            textAfterEvent <- str_extract(x, hepEventMRe)
+            if(length(textAfterEvent) == 0) {
+                hepScores[hepEventM] <- NA
+            } else if (is.na(textAfterEvent)) {
+                hepScores[hepEventM] <- NA
+            } else {
+                hepScores[hepEventM] <- str_extract(textAfterEvent,
+                                                    hepScoresMRe[names(hepEventMRe)])
+            }
+        }
+        eventNames <- names(hepScores)
     }
     
     meetName <- str_extract(x, "(?<=\\n\\n\\t).*")
     meetDate <- str_extract(x, reDates)
-    
+    # will need to remove the unused 55 vs. 60 and 55H vs. 60H
     hepResThisMeet <-
         tibble(
             meet = rep(meetName, times = length(eventNames)),
@@ -118,7 +122,6 @@ getHepScores <- function(x) { # requires full text from each meet, not textAfter
         )
     return(hepResThisMeet)
 }
-
 
 getDecScores <- function(x) { # requires full text from each meet, not textAfterMeet
     # browser()
@@ -145,17 +148,17 @@ getDecScores <- function(x) { # requires full text from each meet, not textAfter
     return(decResThisMeet)
 }
 
-allMeetRes <- function(x) { # this code only gets finals, not prelims. Fix later?
+allMeetRes <- function(x, sex) { # this code only gets finals, not prelims. Fix later?
     # browser()
     res <- tibble()
     for(meet in x) { # outer for loop goes through each meet
-        multi <- detectMulti(meet)
+        multi <- detectMulti(meet, sex)
         meetName <- str_extract(meet, "(?<=\\n\\n\\t).*")
         meetDate <- str_extract(meet, reDates)
         for (event in eventNamesRe) { # inner for loop goes through each event
             # now we need to search for all variations of the multi events
             if (!is.null(names(multi))) {
-                multiScores <- getMultiScores(meet, multi)
+                multiScores <- getMultiScores(meet, multi, sex)
                 res <- bind_rows(res, multiScores)
                 
                 textBeforeMultiRe <- paste0("(?s).*(?=", str_to_title(names(multi)), ")")
@@ -190,6 +193,6 @@ resOneAthlete <- function(url, sex) {
         html_nodes("table")
     meets <- grep("\\n\\n\\t", tables, perl = TRUE)
     meetText <- tables[meets] %>% html_text
-    
-    return(bind_cols(name = athleteName, sex = sex, allMeetRes(meetText)))
+    res <- allMeetRes(meetText, sex)
+    return(bind_cols(name = athleteName, sex = sex, res))
 }
