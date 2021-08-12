@@ -56,6 +56,7 @@ hepNamesWRe <- paste0("(?s)(?<=", hepEventWNames,"\\n).*")
 names(hepNamesWRe) <- names(hepScoresWRe)
 
 pentScoresRe <- c(
+    re55H = "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2})",
     re60H = "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2})",
     reHJ = "(?<=\\s{0,1000}+)(\\d{1}\\.\\d{1,2})",
     reSP = "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2})",
@@ -63,7 +64,7 @@ pentScoresRe <- c(
     re800 = "(?<=\\s{0,1000}+)(\\d:){1}(\\d{2}\\.\\d{1,2})"
 )
 
-pentEventNames <- c("60H", "HJ", "SP", "LJ", "800")
+pentEventNames <- c("55H", "60H", "HJ", "SP", "LJ", "800")
 pentNamesRe <- paste0("(?s)(?<=", pentEventNames,"\\n).*")
 names(pentNamesRe) <- names(pentScoresRe)
 
@@ -71,16 +72,18 @@ names(pentNamesRe) <- names(pentScoresRe)
 # probs need to repeat names(namesRe) thing from above
 # there's some issue when trying to add the 600 and 4x200
 
-indoorEventNames <- c("60", "200", "400", "600", "800", "Mile", "3000", "5000", "60H", "4x200",
-                      "4x400", "DMR", "HJ", "PV", "LJ", "TJ", "SP", "WT", "Pent", "Hep")
+indoorEventNames <- c("55", "60", "200", "400", "600", "800", "Mile", "3000", "5000",
+                      "55H", "60H", "4x200","4x400", "DMR", "HJ", "PV", "LJ", "TJ",
+                      "SP", "WT", "Pent", "Hep")
 outdoorEventNames <- c("100", "200", "400", "800", "1500", "5000", "10000",
                        "100H", "110H", "400H","3000S", "4x100", "4x400",
                        "HJ", "PV", "LJ", "TJ", "SP", "DT", "JT", "Hep", "Dec")
 indoorOnlyEvents <- !(indoorEventNames %in% outdoorEventNames)
-indoorEventNames[indoorOnlyEvents]
+# indoorEventNames[indoorOnlyEvents]
 allEventNames <- c(outdoorEventNames, indoorEventNames[indoorOnlyEvents])
 
 indoorScoresRe <- c(
+    re55 = "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2})",
     re60 = "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2})",
     re200 = "(?<=\\s{0,1000}+)(\\d{2}\\.\\d{1,2})",
     re400 = "(?<=\\s{0,1000}+)(\\d:){0,1}(\\d{2}\\.\\d{1,2})",
@@ -89,6 +92,7 @@ indoorScoresRe <- c(
     reMile = "(?<=\\s{0,1000}+)(\\d:){1}(\\d{2}\\.\\d{1,2})",
     re3000 = "(?<=\\s{0,1000}+)((\\d:){1}|(\\d{2}:))(\\d{2}\\.\\d{1,2})",
     re5000 = "(?<=\\s{0,1000}+)(\\d{2}:)(\\d{2}\\.\\d{1,2})",
+    re55H = "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2})",
     re60H = "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2})",
     re4x200 = "(?<=\\s{0,1000}+)(\\d:){1}(\\d{2}\\.\\d{1,2})",
     re4x400 = "(?<=\\s{0,1000}+)(\\d:){1}(\\d{2}\\.\\d{1,2})",
@@ -129,7 +133,7 @@ outdoorScoresRe <- c(
 )
 
 indoorOnlyScoresRe <- !(names(indoorScoresRe) %in% names(outdoorScoresRe))
-indoorScoresRe[indoorOnlyScoresRe]
+# indoorScoresRe[indoorOnlyScoresRe]
 allScoresRe <- c(outdoorScoresRe, indoorScoresRe[indoorOnlyScoresRe])
 eventNamesRe <- paste0("(?s)(?<=\\n", allEventNames,"\\n).*")
 names(eventNamesRe) <- names(allScoresRe)
