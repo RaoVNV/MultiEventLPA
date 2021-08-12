@@ -20,17 +20,26 @@ resOneAthlete <- function(url, sex) {
         html_nodes("table")
     meets <- grep("\\n\\n\\t", tables, perl = TRUE)
     meetText <- tables[meets] %>% html_text
-    
-    return(bind_cols(name = athleteName, sex = sex, allMeetRes(meetText)))
+    res <- allMeetRes(meetText, sex)
+    return(bind_cols(name = athleteName, sex = sex, res))
 }
 
 resOneAthlete("https://www.tfrrs.org/athletes/1253992/Lewis/Pat_Reaney.html", "m")
+resOneAthlete("https://www.tfrrs.org/athletes/6559750/Texas_AM/Tyra_Gittens.html", "w")
+
+# trouble shooting getting prelims and finals data.
+
+meet <- "\n\n\tTed Nelson Invitational Day One\n\n \n               Jan 17, 2020\n\n     \n  \n60H\n\n\n\n\n\n\n8.58\n\n\n\n \n                                    \n\n2nd \n(F)\n\n\n60H\n\n\n\n\n\n\n8.57\n\n\n\n \n                                    \n\n2nd \n(P)\n\n\nSP\n\n\n\n\n\n\n13.74m\n\n\n\n \n\n\n45' 1\"\n\n\n                                    \n\n6th \n(F)\n\n"
+h60 <- "(?s)(?<=\\n60H\\n).*"
+str_extract_all(meet, "(?s)(?<=\\n60H\\n).*")
+str_extract_all(meet, "\\n60H\\n")
+str_detect(meet, "(?s)(?<=\\n60H\\n).*")
 
 # resOneAthlete("https://www.tfrrs.org/athletes/6422180/Notre_Dame/Yared_Nuguse")
 # resOneAthlete("https://www.tfrrs.org/athletes/3761344/St_Olaf/Anton_Hesse.html")
 
 # oneAthlete <- read_html("https://www.tfrrs.org/athletes/6997786/Georgia/Karel_Tilga")
-# oneAthlete <- read_html("https://www.tfrrs.org/athletes/6559750/Texas_AM/Tyra_Gittens.html")
+# oneAthlete <- read_html("https://www.tfrrs.org/athletes/6559750/Texas_AM/Tyra_Gittens.html", "w")
 # check to make sure that other weird events are also downloaded properly
 # oneAthlete <- read_html("https://www.tfrrs.org/athletes/6422180/Notre_Dame/Yared_Nuguse")
 # oneAthlete <- read_html("https://www.tfrrs.org/athletes/6011691/Minnesota/Alec_Basten")
