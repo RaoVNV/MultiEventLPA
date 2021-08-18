@@ -34,7 +34,8 @@ getMeetLinks <- function(x) {
     meetLinks <- meets[links] %>% 
         str_replace_all("//", "") %>% 
         str_replace_all("/\\n", "") %>% 
-        str_replace("www", "https://www")
+        str_replace("www", "https://www") %>% 
+        unique()
     return(meetLinks)
 }
 
@@ -86,11 +87,13 @@ mOrW <- function(url) { # determines if results page is for men's vs. women's
         html_text() %>%
         str_extract(regex("women's\\s|women\\s|men's\\s|men\\s", ignore_case = TRUE)) %>% 
         unique() %>% 
-        na.omit()
+        str_replace("\\s", "") %>% 
+        na.omit() %>% 
+        tolower()
     
     if (length(h3Text) == 0) {
         sex = NA
-    } else if (h3Text == "Women's") {
+    } else if (h3Text == "women's") {
         sex = as.factor("w")
     } else {
         sex = as.factor("m")
@@ -99,13 +102,13 @@ mOrW <- function(url) { # determines if results page is for men's vs. women's
     return(sex)
 }
 
-getAthleteLinks <- function(x) { # input is vector of url's
+getAthleteLinks <- function(df) { # input is dataframe of url's
     # browser()
-    pb <- progress_bar$new(total = length(x))
+    pb <- progress_bar$new(total = nrow(df))
     linkList <- tibble(link = character(), sex = factor())
-    for (i in 1:length(x)) {
+    for (i in 1:nrow(df)) {
         pb$tick()
-        url <- x[i]
+        url <- as.character(df[i,1])
         if (isThereMulti(url) == FALSE) {
             next()
             # skip the rest of this loop and go to the next url
@@ -130,15 +133,16 @@ getAthleteLinks <- function(x) { # input is vector of url's
             linkList <- bind_rows(linkList, res)
         }
     }
+    linkList <- unique(linkList)
     return(linkList)
 }
 
-getMultiRes <- function(x) { # input data frame with links and sex
+getMultiRes <- function(df) { # input data frame with links and sex
     # browser()
-    if(ncol(x) != 2) {
+    if(ncol(df) != 2) {
         stop("Input requires a data frame with two columns!")
     }
-    pb <- progress_bar$new(total = nrow(x))
+    pb <- progress_bar$new(total = nrow(df))
     res <- tibble(name = character(),
                   sex = factor(),
                   meet = character(),
@@ -147,9 +151,9 @@ getMultiRes <- function(x) { # input data frame with links and sex
                   result = character(),
                   multi = character()
     )
-    for(i in 1:nrow(x)) {
+    for(i in 1:nrow(df)) {
         pb$tick()
-        temp <- resOneAthlete(x[[1]][i], x[[2]][i])
+        temp <- resOneAthlete(df[[1]][i], df[[2]][i])
         res <- bind_rows(res, temp)
     }
     return(res)
