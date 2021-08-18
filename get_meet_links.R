@@ -13,4 +13,4 @@ meetLinks <- meetLinks %>%
     as_tibble() %>% 
     rename(link = value)
 
-write_csv(meetLinks, "meetLinks.csv")
+write_csv(meetLinks, "data/meetLinks.csv")
