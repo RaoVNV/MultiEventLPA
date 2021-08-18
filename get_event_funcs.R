@@ -23,11 +23,21 @@ detectMulti <- function(x, sex) {
         pent <- str_which(x, "Pent\\n{4,}") # 4 or more required because some meet names have hep and dec in tht title
         hep <- str_which(x, "Hep\\n{4,}")
         dec <- character()
-    } else {
+        if(length(pent) > 0 & length(hep) > 0) {
+            hep <- character()
+            dec <- character()
+        }
+    } else if( sex == "m") {
         pent <- character()
         hep <- str_which(x, "Hep\\n{4,}")
         dec <- str_which(x, "Dec\\n{4,}")
+        if(length(hep) > 0 & length(dec) > 0) {
+            hep <- character()
+            dec <- character()
+        }
     }
+    
+    
     
     if(any(length(c(pent, hep, dec) > 0))) {
         idx <- which(map(list(pent, hep, dec), vectorIsNotEmpty) == TRUE)
@@ -160,21 +170,29 @@ allMeetRes <- function(x, sex) { # this code only gets finals, not prelims. Fix 
             if (!is.null(names(multi))) {
                 multiScores <- getMultiScores(meet, multi, sex)
                 res <- bind_rows(res, multiScores)
-                
-                textBeforeMultiRe <- paste0("(?s).*(?=", str_to_title(names(multi)), ")")
+                textBeforeMultiRe <- paste0("(?s).*(?=",
+                                            str_to_title(names(multi)), ")")
                 meet <- str_extract(meet, textBeforeMultiRe)
                 names(multi) <- NULL
             }
-            
+            tempRows <- tibble()
             textAfterEvent <- str_extract(meet, event)
-            if (!is.na(textAfterEvent)) {
+            while(!is.na(textAfterEvent)) {
                 newRow <- getEventScore(textAfterEvent,
                                         eventNamesRe,
                                         event,
                                         meetName,
                                         meetDate)
-                res <- bind_rows(res, newRow)
+                tempRows <- bind_rows(tempRows, newRow)
+                textAfterEvent <- str_extract(textAfterEvent, event)
             }
+            if(nrow(tempRows) > 2) { # there should only be at most prelims and finals for a single meet
+                tempRows <- tibble()
+                
+                # for IAAF there may be 2 prelims, but multi athletes are unlikely to be
+                # in those events
+            }
+            res <- bind_rows(res, tempRows)
         }
     }
     return(res)
