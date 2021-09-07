@@ -1,0 +1,81 @@
+---
+title: "Scraping"
+author: "Anton"
+date: "6/17/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# To-do
+
+- grab meet name
+- grab athlete name
+- grab meet date
+- grab non-multi-event results
+
+
+# Libraries
+```{r}
+library(rvest)
+library(stringr)
+```
+
+# Fixed inputs for parsing
+
+ regex for each event, assuming there is some form of whitespace preceeding it
+ ?<= is a positive look behind. It then looks for 
+ the backslashes with s is white space. {0, 1000} between this many spaces
+ d(1,2) one or two digits followed by a decimal followed by another two decimals
+
+
+```{r}
+re100 <- "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2})"
+reLJ <- "(?<=\\s{0,1000}+)(\\d{1}\\.\\d{1,2})"
+reSP <- "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2}m)"
+reHJ <- "(?<=\\s{0,1000}+)(\\d{1}\\.\\d{1,2}m)"
+re400 <- "(?<=\\s{0,1000}+)(\\d:){0,1}(\\d{2}\\.\\d{1,2})"
+re110H <- "(?<=\\s{0,1000}+)(\\d{2}\\.\\d{1,2})"
+reDT <- "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2}m)"
+rePV <- "(?<=\\s{0,1000}+)(\\d{1}\\.\\d{1,2}m)"
+reJT <- "(?<=\\s{0,1000}+)(\\d{1,2}\\.\\d{1,2}m)"
+re1500 <- "(?<=\\s{0,1000}+)(\\d:){1}(\\d{2}\\.\\d{1,2})"
+
+eventScoresRe <- c(re100, reLJ, reSP, reHJ, re400, re110H, reDT, rePV, reJT, re1500)
+eventNames <- c("100", "LJ", "SP", "HJ", "400", "110H", "DT", "PV", "JT", "1500")
+```
+
+# One Athlete Extract
+```{r}
+#oneAthlete <- read_html("https://www.tfrrs.org/athletes/6972495/Michigan/Ayden_Owens")
+oneAthlete <- read_html("https://www.tfrrs.org/athletes/6997786/Georgia/Karel_Tilga")
+oneAthlete
+```
+
+```{r}
+tables <- oneAthlete %>% 
+    html_nodes("table")
+# for some reason html_nodes doesn't recognize tbody tags
+
+dec <- grep("Dec\\n", tables, perl = TRUE)
+
+decRes <- tables[dec] %>% html_text() # contains all scores related to the decathlon
+
+# str_extract(decRes, "(?s)(?<=100).*") # hard coding that returns everything after the 100
+decEventNames <- c("100", "LJ", "SP", "HJ", "400", "110H", "DT", "PV", "JT", "1500")
+eventNameRe <- paste0("(?s)(?<=", decEventNames,").*")
+
+
+dec_scores = vector(mode = "list", length = length(decRes))
+for(i in 1:length(eventNameRe)) {
+    allTextAfter <- str_extract(decRes, eventNameRe[i])
+    dec_scores[[i]] <-
+        str_extract(allTextAfter, eventScoresRe[i])
+    names(dec_scores)[[i]] <- eventNames[i]
+}
+dec_scores
+```
+
