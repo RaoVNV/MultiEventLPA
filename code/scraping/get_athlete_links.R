@@ -3,7 +3,7 @@ library(httr)
 library(tidyverse)
 library(progress)
 
-source("code/helper_funcs/get_link_funcs.R")
+source("code/scraping/scraping_funcs/get_link_funcs.R")
 
 # divisions helps split up the indicies of the meets. This is part of what allows
 # you to save your progress as you go

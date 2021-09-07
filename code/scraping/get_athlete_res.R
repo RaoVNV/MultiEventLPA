@@ -3,9 +3,9 @@ library(httr)
 library(tidyverse)
 library(progress)
 
-source("regex_list.R")
-source("get_event_funcs.R")
-source("get_link_funcs.R")
+source("code/scraping/scraping_funcs/regex_list.R")
+source("code/scraping/scraping_funcs/get_event_funcs.R")
+source("code/scraping/scraping_funcs/get_link_funcs.R")
 # source("meets_one_athlete.R")
 
 # divisions helps split up the indicies of the meets. This is part of what allows
