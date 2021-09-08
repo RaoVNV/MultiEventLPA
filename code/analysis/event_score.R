@@ -16,6 +16,9 @@ library(tidyverse)
 ## Scoring methods are based on IAAF rules (2001).
 
 event_score <- function(result, event, gender) {
+  result <- as.numeric(result)
+  event <- as.character(event) # force this to all lowercase?
+  gender <- as.character(gender)
   ### Parameters of function
   # result (numeric): speed (in seconds), height (in centimeters), distance (in meters)
   # event (character): event name, accepts: ""60", "60H", "100", "100H", "110H", "200", "400", "800", "1000", "1500", "HJ", "PV", "LJ", "SP", "DT", "JT"
@@ -49,7 +52,7 @@ event_score <- function(result, event, gender) {
   c <- score_parameters[[gender]] %>% filter(events == event) %>% pull(c)
   
   ## Used to determine event type, which effects the equation used to calculate points
-  type <- ifelse(event %in% field_events, "field", 
+  type <- ifelse(event %in% field_events, "field", # jumps and throws
                  ifelse(event %in% track_events, "track", "no event type"))
   
   # if the gender and event combination does not appear in the IAAF table, 
@@ -61,9 +64,11 @@ event_score <- function(result, event, gender) {
   
   # Calculating event points
   if (type == "track") {
-    return(a*(b - result)^c) # track events (faster time results in more points)
+    score <- floor(a*(b - result)^c)
+    return(score) # track events (faster time results in more points)
   } else if (type == "field") {
-    return(a*(result - b)^c) # field events (longer distance/height results in more points)
+    score <- floor(a*(result - b)^c)
+    return(score) # field events (longer distance/height results in more points)
   } else 
     return("Error")
 }
