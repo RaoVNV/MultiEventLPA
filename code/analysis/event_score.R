@@ -25,6 +25,9 @@ event_score <- function(result, event, gender) {
   # event (character): event name, accepts: ""60", "60H", "100", "100H", "110H", "200", "400", "800", "1000", "1500", "HJ", "PV", "LJ", "SP", "DT", "JT"
   # gender (character): "m" or "w" 
   
+  ##### Should all of these "static" parameters be put into the global environment
+  ##### instead of getting loaded every single time the function is called?
+  
   ## parameter values from IAAF Scoring Tables for Combined Events.pdf (in GitHub)
   mens_parameters <- 
     data.frame(
