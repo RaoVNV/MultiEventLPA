@@ -15,6 +15,32 @@ library(tidyverse)
 # Used to calculate the number of points earned for a T&F multi event.
 ## Scoring methods are based on IAAF rules (2001).
 
+## parameter values from IAAF Scoring Tables for Combined Events.pdf (in GitHub)
+# constant stuff moved to outside of function so it's not redeclared each time
+mens_parameters <- 
+  data.frame(
+    events = c("100", "200", "400", "1500", "110H", "HJ", "PV", "LJ", "SP", "DT", "JT", "60", "1000", "60H"),
+    a = c(25.4347, 5.8425, 1.53775, 0.03768, 5.74352, 0.8465, 0.2797, 0.14354, 51.39, 12.91, 10.14, 58.0150, 0.08713, 20.5173), 
+    b = c(18, 38, 82, 480, 28.5, 75, 100, 220, 1.5, 4, 7, 11.5, 305.5, 15.5),
+    c = c(1.81, 1.81, 1.81, 1.85, 1.92, 1.42, 1.35, 1.4, 1.05, 1.1, 1.08, 1.81, 1.85, 1.92)
+  )
+womens_parameters <- 
+  data.frame(
+    events = c("200", "800", "100H", "HJ", "LJ", "SP", "JT", "100", "400", "1500", "PV", "DT", "60H"),
+    a = c(4.99087, 0.11193, 9.23076, 1.84523, 0.188807, 56.0211, 15.9803, 17.8570, 1.34285, 0.02883, 0.44125, 12.3311, 20.0479), 
+    b = c(42.5, 254, 26.7, 75, 210, 1.5, 3.8, 21, 91.7, 535, 100, 3, 17),
+    c = c(1.81, 1.88, 1.835, 1.348, 1.41, 1.05, 1.04, 1.81, 1.81, 1.88, 1.35, 1.1, 1.835)
+  )
+
+field_events <- c("DT", "HJ", "JT", "LJ", "PV", "SP")
+track_events <- c("60", "60H", "100", "200", "400", "1500", "110H", "1000", "800", "100H")
+
+# jumps <- c("HJ", "LJ", "PV")
+# throws <- c("DT", "JT", "SP")
+
+score_parameters <- list(mens_parameters, womens_parameters)
+names(score_parameters) <- c("m", "w")
+
 event_score <- function(result, event, gender) {
   # browser()
   result <- as.numeric(result)
@@ -25,34 +51,6 @@ event_score <- function(result, event, gender) {
   # event (character): event name, accepts: ""60", "60H", "100", "100H", "110H", "200", "400", "800", "1000", "1500", "HJ", "PV", "LJ", "SP", "DT", "JT"
   # gender (character): "m" or "w" 
   
-  ##### Should all of these "static" parameters be put into the global environment
-  ##### instead of getting loaded every single time the function is called?
-  
-  ## parameter values from IAAF Scoring Tables for Combined Events.pdf (in GitHub)
-  mens_parameters <- 
-    data.frame(
-      events = c("100", "200", "400", "1500", "110H", "HJ", "PV", "LJ", "SP", "DT", "JT", "60", "1000", "60H"),
-      a = c(25.4347, 5.8425, 1.53775, 0.03768, 5.74352, 0.8465, 0.2797, 0.14354, 51.39, 12.91, 10.14, 58.0150, 0.08713, 20.5173), 
-      b = c(18, 38, 82, 480, 28.5, 75, 100, 220, 1.5, 4, 7, 11.5, 305.5, 15.5),
-      c = c(1.81, 1.81, 1.81, 1.85, 1.92, 1.42, 1.35, 1.4, 1.05, 1.1, 1.08, 1.81, 1.85, 1.92)
-    )
-  womens_parameters <- 
-    data.frame(
-      events = c("200", "800", "100H", "HJ", "LJ", "SP", "JT", "100", "400", "1500", "PV", "DT", "60H"),
-      a = c(4.99087, 0.11193, 9.23076, 1.84523, 0.188807, 56.0211, 15.9803, 17.8570, 1.34285, 0.02883, 0.44125, 12.3311, 20.0479), 
-      b = c(42.5, 254, 26.7, 75, 210, 1.5, 3.8, 21, 91.7, 535, 100, 3, 17),
-      c = c(1.81, 1.88, 1.835, 1.348, 1.41, 1.05, 1.04, 1.81, 1.81, 1.88, 1.35, 1.1, 1.835)
-    )
-
-  field_events <- c("DT", "HJ", "JT", "LJ", "PV", "SP")
-  track_events <- c("60", "60H", "100", "200", "400", "1500", "110H", "1000", "800", "100H")
-  
-  jumps <- c("HJ", "LJ", "PV")
-  throws <- c("DT", "JT", "SP")
-  
-  score_parameters <- list(mens_parameters, womens_parameters)
-  names(score_parameters) <- c("m", "w")
-  
   ## pulling scoring parameters based on gender and event
   a <- score_parameters[[gender]] %>% filter(events == event) %>% pull(a)
   b <- score_parameters[[gender]] %>% filter(events == event) %>% pull(b)
@@ -61,8 +59,6 @@ event_score <- function(result, event, gender) {
   ## Used to determine event type, which effects the equation used to calculate points
   type <- ifelse(event %in% field_events, "field", # jumps and throws
                  ifelse(event %in% track_events, "track", "no event type"))
-  
-  
   
   # if the gender and event combination does not appear in the IAAF table, 
   ## the above code will produce numeric(0).
@@ -76,9 +72,6 @@ event_score <- function(result, event, gender) {
     score <- floor(a*(b - result)^c)
     return(score) # track events (faster time results in more points)
   } else if (type == "field") {
-    if (event %in% jumps) {
-      result <- result * 100 # jumps are converted to centimeters
-    }
     score <- floor(a*(result - b)^c)
     return(score) # field events (longer distance/height results in more points)
   } else {
