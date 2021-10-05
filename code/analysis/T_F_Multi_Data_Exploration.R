@@ -16,11 +16,11 @@ rm(list=ls())
 library(tidyverse)
 library(lubridate)
 
-source(file = "event_score.R") # function to calculate event points
+source(file = "code/analysis/event_score.R") # function to calculate event points
 
 
 ##### Load in Data ##### 
-athlete_results <- read_csv("~/Box/T_F_Multi_Event/Data/athlete_results.csv")
+athlete_results <- read_csv("data/raw/athlete_results.csv")
 
 # variables
 unique(athlete_results$sex)
