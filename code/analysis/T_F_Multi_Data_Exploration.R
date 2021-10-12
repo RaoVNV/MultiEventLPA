@@ -114,6 +114,8 @@ athlete_results_4 <- athlete_results_3 %>%
     points = event_score(result = results_modified, event = event, gender = sex)
   )
 
+# athlete_res_scored <- write_csv(athlete_results_4,
+#                                 file = "data/processed/athlete_res_scored")
 
 ##### Write Out Files ##### 
 # write_csv(athlete_results_4, file = "../Data/athlete_results_analytical.csv", row.names = F)
